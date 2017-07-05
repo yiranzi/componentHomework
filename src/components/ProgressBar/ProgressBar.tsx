@@ -13,6 +13,7 @@ interface ProgressBarPropsTypes {
     isLoading?: boolean;
 }
 /**
+ * 进度条组件，用于音频播放进度条，提示进度条等
  * @class ProgressBar
  * @type ICT-UI-Component
  * @author heartblood
