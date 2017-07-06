@@ -8,13 +8,11 @@ import * as className from './style/Carousel.less';
 
 interface propsTypes {
     index: number
-    width?: Number | String
-    height?: Number | String
     contentPadding?: String
     handleIndexChangeCallback?: Function
     direction?: String
     styleTop?: String
-    stylebottom?: String
+    styleBottom?: String
     styleLeft?: String
     styleRight?: String
     topNode?: JSX.Element
@@ -29,9 +27,17 @@ interface propsTypes {
  * @class Carousel
  * @type ICT-UI-Component
  * @author heartblood
- * @param {number} index - [可选] 宽度(单位px) 尚未做rem兼容
- * @param {number} index - [必填] 当前进度，不能超过总step长度，可动态改变，从1开始计数
- * @param {Array<{index:number, title: String}>} steps - [必填] step内容数组，index为step步骤数字，title为下方文字说明，传入的数组须有序， title为可选
+ * @param {number} index - [必填] 当前显示index
+ * @param {function} handleIndexChangeCallback - [可选] index改变时候会触发该回调函数，必须含有一个参数index，index为 +- 1，表明当前index改变值
+ * @param {string} direction - [可选] 表明方向，vertical为垂直，horizontal为水平，默认为垂直
+ * @param {string} styleTop - [可选] 顶部slot样式
+ * @param {string} styleBottom - [可选] 底部slot样式
+ * @param {string} styleRight - [可选] 右部slot样式
+ * @param {string} styleLeft - [可选] 左部slot样式
+ * @param {JSX.Element} topNode - [可选] 顶部slot
+ * @param {JSX.Element} bottomNode - [可选] 底部slot
+ * @param {JSX.Element} rightNode - [可选] 右部slot
+ * @param {JSX.Element} leftNode - [可选] 左部slot
  */
 export default class Carousel extends React.PureComponent<propsTypes> {
     name: "SliderView"
@@ -54,7 +60,7 @@ export default class Carousel extends React.PureComponent<propsTypes> {
     /**
      * 获取显示列表元素
      * @func
-     * @type - get
+     * @type get
      */
     get getContentBody() {
         if (Array.isArray(this.props.children)) {
@@ -139,7 +145,7 @@ export default class Carousel extends React.PureComponent<propsTypes> {
                     })}
                 </div>
                 <div className={(className as any).contentTop + ' ' + this.props.styleTop}>{this.props.topNode}</div>
-                <div className={(className as any).contentBottom + ' ' + this.props.stylebottom}>{this.props.bottomNode}</div>
+                <div className={(className as any).contentBottom + ' ' + this.props.styleBottom}>{this.props.bottomNode}</div>
                 <div className={(className as any).contentRight + ' ' + this.props.styleRight}>{this.props.rightNode}</div>
                 <div className={(className as any).contentLeft + ' ' + this.props.styleLeft}>{this.props.leftNode}</div>
             </div>
