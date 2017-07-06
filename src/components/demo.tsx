@@ -12,6 +12,7 @@ import Spinner from "@/components/Spinner/Spinner";
 import StepProgressBar from "@/components/StepProgressBar/StepProgressBar";
 import SnackBar from "@/components/SnackBar/SnackBar";
 import Carousel from "@/components/Carousel/Carousel";
+import Button from "@/components/Button/Button";
 interface StateTypes {
     index: number,
     Carouselindex: number
@@ -41,7 +42,7 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
 
     }
     handleIndexChangeCallback(index: number) {
-        if (this.state.Carouselindex + index > -1 && this.state.Carouselindex + index < 4) {
+        if (this.state.Carouselindex + index > -1 && this.state.Carouselindex + index < 5) {
             this.setState((prevState, props) => ({
                 Carouselindex: prevState.Carouselindex + index
             }));
@@ -50,8 +51,14 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
     render() {
         return (
             <div style={{ height: "100%" }}>
-                <Carousel index={this.state.Carouselindex} handleIndexChangeCallback={this.handleIndexChangeCallback} direction={""}>
-                    <div data-index="1" style={{ height: "100%" }}>
+                <Carousel 
+                    index={this.state.Carouselindex} 
+                    handleIndexChangeCallback={this.handleIndexChangeCallback} direction={""}
+                    bottomNode={<StepProgressBar steps={steps} index={this.state.Carouselindex + 1} width={500} />}>
+                     <div data-index="1" style={{ height: "100%" }}>
+                        <Button />
+                    </div>
+                    <div data-index="5" style={{ height: "100%" }}>
                         <h1>ProgressBar</h1>
                         <ProgressBar progress={40} buffer={20} isLoading={false} />
                     </div>
@@ -80,14 +87,17 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
 
 let steps = [{
     index: '1',
-    title: 'step 1'
+    //title: 'step 1'
 }, {
     index: '2',
-    title: 'step 2'
+    //title: 'step 2'
 }, {
     index: '3',
-    title: 'step 3'
+    //title: 'step 3'
 }, {
     index: '4',
-    title: 'step 4'
+    //title: 'step 4'
+}, {
+    index: '5',
+    //title: 'step 4'
 }];

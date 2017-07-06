@@ -61,6 +61,7 @@ export default class Carousel extends React.PureComponent<propsTypes> {
      * 获取显示列表元素
      * @func
      * @type get
+     * @return Array<JSX.Element>
      */
     get getContentBody() {
         if (Array.isArray(this.props.children)) {
@@ -140,7 +141,7 @@ export default class Carousel extends React.PureComponent<propsTypes> {
                     onTouchStart={this.handleTouchStart}
                     onTouchMove={this.handleTouchMove}
                     onTouchEnd={this.handleTouchEnd}>
-                    {this.contentBody.map((element, index) => {
+                    {this.contentBody.map((element: JSX.Element, index: number) => {
                         return <div key={index} className={(className as any).contentPage} style={this.style(index)}>{element}</div>
                     })}
                 </div>
