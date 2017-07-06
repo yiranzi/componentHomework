@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Global</title>
+	<title>Documentation Class: StepProgressBar</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -79,13 +79,15 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Global</h1>
+	<h1 class="page-title">Class: StepProgressBar</h1>
 <section>
 
 <header>
     
         <h2>
+            <span class="ancestors"><a href="module-ICT-UI.html">ICT-UI</a>~</span>
         
+        StepProgressBar
         </h2>
         
     
@@ -96,83 +98,122 @@
     <div class="container-overview">
     
         
-
-        
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        <dl>
-            
 <hr>
-<dt class="name" id="v">
-    <h4 id="v"><span class="type-signature"></span>v<span class="type-signature"></span></h4>
-
+<dt>
+    <h4 class="name" id="StepProgressBar"><span class="type-signature"></span>new StepProgressBar(width, current_index)</h4>
+    
     
 </dt>
 <dd>
+
     
     <div class="description">
-        <p>This module is used to demostrate webpack's hot module replacement:</p>
-<ol>
-<li>Start dev-server with <code>npm run dev-server</code></li>
-<li>Open http://localhost:9000/ and browser console</li>
-<li>Modify this file and see how it get hot-reloaded and accepted</li>
-</ol>
+        <p>步骤进度条组件，用于步骤提示等</p>
     </div>
     
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>[可选] 宽度(单位px) 尚未做rem兼容</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>current_index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>[必填] 当前进度，不能超过总step长度，可动态改变，从1开始计数</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code></code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;{index:number, title: String}></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>[必填] step内容数组，index为step步骤数字，title为下方文字说明，传入的数组须有序， title为可选</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
     
 
@@ -197,6 +238,13 @@
 	
 
 	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li>heartblood</li>
+			</ul>
+	</dd>
+	
 
 	
 
@@ -215,11 +263,35 @@
 	
 </dl>
 
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 </dd>
 
-        </dl>
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     

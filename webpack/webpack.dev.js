@@ -26,6 +26,7 @@ module.exports = webpackMerge([
             compress: true,
             historyApiFallback: true,
             port: 9000,
+            disableHostCheck: true
         },
         plugins: [
             new webpack.DefinePlugin({

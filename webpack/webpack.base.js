@@ -34,10 +34,20 @@ module.exports = {
             {
                 test: /\.less/,
                 exclude: /(node_modules|bower_components)/,
-                loader: ExtractTextPlugin.extract({ 
-                    fallback: 'style-loader', 
-                    use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!less-loader' 
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!less-loader'
                 })
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                use: {
+                    loader: 'url-loader',
+                    query: {
+                        limit: 10000,
+                        name: path.resolve(__dirname, '../dev/img/[name].[hash:7].[ext]')
+                    }
+                }
             }
         ]
     },

@@ -1,0 +1,79 @@
+.spinner {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    z-index: 10;
+}
+.spinner > div {
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 100%;
+}
+.spinner > div:first-child {
+    background: #AAD7FF;
+    height: 22px;
+    width: 22px;
+    top: 34px;
+    left: 34px;
+    -webkit-animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+    animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+}
+.spinner > div:last-child {
+    position: absolute;
+    border: 2px solid #AAD7FF;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid;
+    border-color: #AAD7FF transparent #AAD7FF transparent;
+    -webkit-animation: rotate 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+    animation: rotate 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+    -webkit-animation-duration: 1s;
+     animation-duration: 1s;
+ }
+ @keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg) scale(1);
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        -webkit-transform: rotate(180deg) scale(0.6);
+        transform: rotate(180deg) scale(0.6);
+    }
+    100% {
+        -webkit-transform: rotate(360deg) scale(1);
+        transform: rotate(360deg) scale(1);
+    }
+}
+@keyframes scale {
+   30% {
+       -webkit-transform: scale(0.3);
+       transform: scale(0.3);
+   }
+   100% {
+       -webkit-transform: scale(1);
+       transform: scale(1);
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeOutBottom {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(40%);
+        opacity: 0;
+        display: none;
+    }
+}

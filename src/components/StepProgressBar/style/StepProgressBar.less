@@ -1,0 +1,89 @@
+.container {
+    margin: auto;
+    text-align: center;
+    .step {
+        display: inline-block;
+        vertical-align: top;
+        .state {
+            position: relative;
+            height: 32px;
+            .circle-green,
+            .circle-gray,
+            .circle-white {
+                box-sizing: border-box;
+                display: table-cell;
+                text-align: center;
+                vertical-align: middle;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                border-width: 2px;
+                border-style: solid;
+            }
+            .circle-white {
+                box-sizing: border-box;
+                background-color: transparent;
+                border-color: #bfcbd9;
+                color: #bfcbd9;
+            }
+            .circle-green {
+                box-sizing: border-box;
+                background-color: #13ce66;
+                border-color: #13ce66;
+                color: #ffffff; 
+            }
+            .circle-gray {
+                box-sizing: border-box;
+                background-color: #bfcbd9;
+                border-color: #bfcbd9;
+                color: #ffffff;
+            }
+            .backline {
+                position: absolute;
+                display: inline-block;
+                top: 50%;
+                left: 32px;
+                transform: translateY(-50%);
+                width: 40px;
+                height: 2px;
+                background-color: #bfcbd9;
+                .progress-half-line,
+                .progress-full-line,
+                .progress-null-line {
+                    display: block;
+                    height: 0;
+                    border-width: 1px;
+                    border-right-width: 0px;
+                    border-left-width: 0px;
+                    border-style: solid;
+                    border-color: #13ce66;
+                    transition: all .15s;
+                    color: #13ce66;
+                }
+                .progress-null-line {
+                    width: 0;
+                }
+                .progress-half-line {
+                    width: 50%;
+                    transition-delay: .15s;
+                }
+                .progress-full-line {
+                    width: 100%;
+                }
+            }
+        }
+        .step-title {
+            padding-top: 0.5rem;
+            width: 32px;
+            text-align: center;
+        }
+    }
+}
+
+.stepField {
+    display: inline-block;
+    vertical-align: top;
+}
+.okImg {
+    vertical-align: middle;
+}
