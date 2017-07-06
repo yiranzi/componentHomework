@@ -9,7 +9,7 @@ import * as className from "./style/StepProgressBar.less";
 interface StepProgressBarPropsTypes {
     steps: Array<Object>
     width?: number
-    current_index: number
+    index: number
 }
 /**
  * 步骤进度条组件，用于步骤提示等
@@ -17,7 +17,7 @@ interface StepProgressBarPropsTypes {
  * @type ICT-UI-Component
  * @author heartblood
  * @param {number} width - [可选] 宽度(单位px) 尚未做rem兼容
- * @param {number} current_index - [必填] 当前进度，不能超过总step长度，可动态改变，从1开始计数
+ * @param {number} index - [必填] 当前进度，不能超过总step长度，可动态改变，从1开始计数
  * @param {Array<{index:number, title: String}>} steps - [必填] step内容数组，index为step步骤数字，title为下方文字说明，传入的数组须有序， title为可选
  */
 export default class StepProgressBar extends React.PureComponent<StepProgressBarPropsTypes> {
@@ -29,19 +29,19 @@ export default class StepProgressBar extends React.PureComponent<StepProgressBar
         console.log(this.realWidth)
     }
     changeCircleStyle(index: number): String {
-        if (index < this.props.current_index) {
+        if (index < this.props.index) {
             return (className as any)['circle-green'];
         }
-        if (index === this.props.current_index) {
+        if (index === this.props.index) {
             return (className as any)['circle-gray'];
         }
         return (className as any)['circle-white'];
     }
     changeProgressStyle(index: number) {
-        if (index < this.props.current_index - 1) {
+        if (index < this.props.index - 1) {
             return (className as any)['progress-full-line'];
         }
-        if (index === this.props.current_index - 1) {
+        if (index === this.props.index - 1) {
             return (className as any)['progress-half-line'];
         }
         return (className as any)['progress-null-line'];
@@ -52,8 +52,8 @@ export default class StepProgressBar extends React.PureComponent<StepProgressBar
                 <div className={(className as any).stepField} key={index}>
                     <div className={(className as any).state} style={{ width: index < this.props.steps.length - 1 ? `${this.realWidth/4}px` : 'width: 32px' }}>
                         <div className={this.changeCircleStyle(index)}>
-                            <span style={{display: index >= this.props.current_index ? "inline-block" : "none"}}>{value.index}</span>
-                            <img className={(className as any).okImg} src={require("@/assets/image/StepProgressBar/ok.svg")} width="24px" height="24px" style={{display: index >= this.props.current_index ? "none" : "inline"}}></img>
+                            <span style={{display: index >= this.props.index ? "inline-block" : "none"}}>{value.index}</span>
+                            <img className={(className as any).okImg} src={require("@/assets/image/StepProgressBar/ok.svg")} width="24px" height="24px" style={{display: index >= this.props.index ? "none" : "inline"}}></img>
                         </div>
                         <div className={(className as any).backline} 
                             style={{
