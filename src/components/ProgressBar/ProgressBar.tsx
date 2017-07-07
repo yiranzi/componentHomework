@@ -17,7 +17,7 @@ interface ProgressBarPropsTypes {
  * @class ProgressBar
  * @type ICT-UI-Component
  * @author heartblood
- * @param {string} width - [可选] 宽度
+ * @param {string} width - [可选] 宽度，不填则为100%
  * @param {number} progress - [必填] 当前进度长度(百分比)
  * @param {number} buffer - [可选] 当前缓存进度长度(百分比)
  * @param {boolean} isLoading - [可选] 为true时候，将无视其余参数，进入加载状态动画
@@ -25,7 +25,7 @@ interface ProgressBarPropsTypes {
 export default class ProgressBar extends React.PureComponent<ProgressBarPropsTypes> {
     public static defaultProps: Partial<ProgressBarPropsTypes> = {
         buffer: 0,
-        width: "500px"
+        width: "100%"
     };
     render() {
         return (

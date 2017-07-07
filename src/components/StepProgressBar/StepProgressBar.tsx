@@ -17,7 +17,7 @@ interface StepProgressBarPropsTypes {
  * @type ICT-UI-Component
  * @author heartblood
  * @param {number} width - [可选] 宽度(单位px) 尚未做rem兼容
- * @param {number} index - [必填] 当前进度，不能超过总step长度，可动态改变，从1开始计数
+ * @param {number} index - [必填] 当前进度，不能超过总step长度，可动态改变，从0开始计数
  * @param {Array<{index:number, title: String}>} steps - [必填] step内容数组，index为step步骤数字，title为下方文字说明，传入的数组须有序， title为可选
  */
 export default class StepProgressBar extends React.PureComponent<StepProgressBarPropsTypes> {

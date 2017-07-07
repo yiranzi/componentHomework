@@ -13,6 +13,8 @@ import StepProgressBar from "@/components/StepProgressBar/StepProgressBar";
 import SnackBar from "@/components/SnackBar/SnackBar";
 import Carousel from "@/components/Carousel/Carousel";
 import Button from "@/components/Button/Button";
+import Avatar from "@/components/Avatar/Avatar";
+import Loading from "@/components/Loading/Loading";
 interface StateTypes {
     index: number,
     Carouselindex: number
@@ -42,6 +44,8 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
 
     }
     handleIndexChangeCallback(index: number) {
+        console.log("handleIndexChangeCallback",this.state.Carouselindex + index);
+        
         if (this.state.Carouselindex + index > -1 && this.state.Carouselindex + index < 5) {
             this.setState((prevState, props) => ({
                 Carouselindex: prevState.Carouselindex + index
@@ -51,16 +55,22 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
     render() {
         return (
             <div style={{ height: "100%" }}>
-                <Carousel 
-                    index={this.state.Carouselindex} 
+                <Carousel
+                    index={this.state.Carouselindex}
                     handleIndexChangeCallback={this.handleIndexChangeCallback} direction={""}
-                    bottomNode={<StepProgressBar steps={steps} index={this.state.Carouselindex + 1} width={500} />}>
-                     <div data-index="1" style={{ height: "100%" }}>
+                    bottomNode={<StepProgressBar steps={steps} index={this.state.Carouselindex} width={250} />}>
+                    <div data-index="11" style={{ height: "100%" }}>
+                        <Avatar shape={"square"}>ZT</Avatar>
+                    </div>
+                    <div data-index="1" style={{ height: "100%" }}>
+                        <Loading />
+                    </div>
+                    <div data-index="6" style={{ height: "100%" }}>
                         <Button />
                     </div>
                     <div data-index="5" style={{ height: "100%" }}>
                         <h1>ProgressBar</h1>
-                        <ProgressBar progress={40} buffer={20} isLoading={false} />
+                        <div style={{width: "100%"}}><ProgressBar progress={40} buffer={20} isLoading={false} /></div>
                     </div>
                     <div data-index="2" style={{ height: "100%" }}>
                         <h1>Spinner</h1>
@@ -68,7 +78,7 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
                     </div>
                     <div data-index="3" style={{ height: "100%" }}>
                         <h1 onClick={this.clickhandle}>StepProgressBar</h1>
-                        <StepProgressBar steps={steps} index={this.state.index} width={500} />
+                        <StepProgressBar steps={steps} index={this.state.index} width={250} />
                     </div>
                     <div data-index="4" style={{ height: "100%" }}>
                         <h1>SnackBar</h1>

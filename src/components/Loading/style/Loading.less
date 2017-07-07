@@ -1,0 +1,35 @@
+.type_one_circle {
+    display: inline-block;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+    width: 1rem;
+    height: 1rem;
+    background: #ccc;
+    border-radius: 50%;
+    animation-name: type_one_circle_Animation;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+}
+
+.type_one_circleOne {
+    .type_one_circle;
+    
+}
+.type_one_circleTwo {
+    .type_one_circle;
+    animation-delay: 0.16s;;
+}
+.type_one_circleThree {
+    .type_one_circle;
+    animation-delay: 0.32s;
+}
+
+@keyframes type_one_circle_Animation {
+    0%, 80%, 100% {
+        transform: scale(0.0);
+    } 
+    40% {
+        transform: scale(1.0);
+    }
+}

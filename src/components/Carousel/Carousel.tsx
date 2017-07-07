@@ -6,6 +6,8 @@
 import * as React from 'react';
 import * as className from './style/Carousel.less';
 
+import SwipeView from "@/components/SwipeView/SwipeView";
+
 interface propsTypes {
     index: number
     contentPadding?: String
@@ -21,10 +23,12 @@ interface propsTypes {
     leftNode?: JSX.Element
 }
 
-
 /**
  * 滑动容器组件
+ * 
+ * @export
  * @class Carousel
+ * @extends {React.PureComponent<propsTypes>}
  * @type ICT-UI-Component
  * @author heartblood
  * @param {number} index - [必填] 当前显示index
@@ -45,17 +49,15 @@ export default class Carousel extends React.PureComponent<propsTypes> {
     private readonly contentBody = this.getContentBody
     private touchStartPoint: { screenX: number, screenY: number } = { screenX: 0, screenY: 0 }
     private touchStartPointTemp: { screenX: number, screenY: number } = { screenX: 0, screenY: 0 }
-    private touchLock: Boolean = false
-    private animationLockCount: number = 0
+    private touchLock: Boolean = true
     public static defaultProps: Partial<propsTypes> = {
         direction: "vertical",
         contentPadding: "20%"
     };
     constructor(props: propsTypes) {
         super(props);
-        this.handleTouchStart = this.handleTouchStart.bind(this);
-        this.handleTouchMove = this.handleTouchMove.bind(this);
-        this.handleTouchEnd = this.handleTouchEnd.bind(this);
+        this.swiping = this.swiping.bind(this);
+        this.swiped = this.swiped.bind(this);
     }
     /**
      * 获取显示列表元素
@@ -89,58 +91,35 @@ export default class Carousel extends React.PureComponent<propsTypes> {
             verticalAlign: "top"
         }
     }
-    handleTouchStart(event: any) {
-        if (!this.touchLock) {
-            this.touchStartPoint.screenX = event.touches[0].screenX;
-            this.touchStartPoint.screenY = event.touches[0].screenY;
-            this.animationLockCount = 0;
-        } else {
-            return false
-        }
+    swiped() {
+        this.touchLock = true;
     }
-    handleTouchMove(event: any) {
-        if (!this.touchLock && this.animationLockCount === 0) {
-            if (this.props.direction === "vertical") {
-                if (this.touchDistance + event.touches[0].screenY - this.touchStartPoint.screenY <= 0) {
-                    this.touchLock = true;
-                    this.animationLockCount += 1;
-                    this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(1);
-                } else if (this.touchDistance - event.touches[0].screenY - this.touchStartPoint.screenY <= 0) {
-                    this.touchLock = true
-                    this.animationLockCount += 1;
-                    this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(-1);
-                }
-            } else {
-                if (this.touchDistance + event.touches[0].screenX - this.touchStartPoint.screenX <= 0) {
-                    this.touchLock = true;
-                    this.animationLockCount += 1;
-                    this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(1);
-                } else if (this.touchDistance - event.touches[0].screenX - this.touchStartPoint.screenX <= 0) {
-                    this.touchLock = true
-                    this.animationLockCount += 1;
-                    this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(-1);
-                }
+    swiping(e:any, deltaX: number, deltaY: number, absX: number, absY: number, velocity: number) {
+        if (this.props.direction === "vertical") {
+            if (deltaX > 80 && velocity > 1 && this.touchLock) {
+                this.touchLock = false;
+                this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(1);
+            } else if (deltaX < -80 && velocity > 1 && this.touchLock) {
+                this.touchLock = false;
+                this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(-1);
             }
         } else {
-            return false;
+            if (deltaX > 100 && velocity > 1 && this.touchLock) {
+                this.touchLock = false;
+                this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(1);
+            } else if (deltaX < -100 && velocity > 1 && this.touchLock) {
+                this.touchLock = false;
+                this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(-1);
+            }
         }
-    }
-    handleTouchEnd() {
-        if (this.touchLock && this.animationLockCount === 1) {
-            this.animationLockCount = 2;
-            this.touchLock = false;
-        }
-
     }
     render() {
         return (
-            <div className={(className as any).container}>
-                <div
-                    style={{ flexDirection: this.props.direction === "vertical" ? "column" : "row" }}
-                    className={(className as any).contentBody}
-                    onTouchStart={this.handleTouchStart}
-                    onTouchMove={this.handleTouchMove}
-                    onTouchEnd={this.handleTouchEnd}>
+            <SwipeView 
+                onSwiping={this.swiping} className={(className as any).container}
+                onSwiped={this.swiped}>
+                <div style={{ flexDirection: this.props.direction === "vertical" ? "column" : "row" }}
+                    className={(className as any).contentBody}>
                     {this.contentBody.map((element: JSX.Element, index: number) => {
                         return <div key={index} className={(className as any).contentPage} style={this.style(index)}>{element}</div>
                     })}
@@ -149,7 +128,7 @@ export default class Carousel extends React.PureComponent<propsTypes> {
                 <div className={(className as any).contentBottom + ' ' + this.props.styleBottom}>{this.props.bottomNode}</div>
                 <div className={(className as any).contentRight + ' ' + this.props.styleRight}>{this.props.rightNode}</div>
                 <div className={(className as any).contentLeft + ' ' + this.props.styleLeft}>{this.props.leftNode}</div>
-            </div>
+            </SwipeView>
         );
     }
 }
