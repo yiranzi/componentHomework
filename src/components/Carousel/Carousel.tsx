@@ -11,6 +11,10 @@ import SwipeView from "@/components/SwipeView/SwipeView";
 interface propsTypes {
     index: number
     contentPadding?: String
+    contentPaddingTop?: String
+    contentPaddingBottom?: String
+    contentPaddingLeft?: String
+    contentPaddingRight?: String
     handleIndexChangeCallback?: Function
     direction?: String
     styleTop?: String
@@ -51,13 +55,13 @@ export default class Carousel extends React.PureComponent<propsTypes> {
     private touchStartPointTemp: { screenX: number, screenY: number } = { screenX: 0, screenY: 0 }
     private touchLock: Boolean = true
     public static defaultProps: Partial<propsTypes> = {
-        direction: "vertical",
-        contentPadding: "20%"
+        direction: "vertical"
     };
     constructor(props: propsTypes) {
         super(props);
         this.swiping = this.swiping.bind(this);
         this.swiped = this.swiped.bind(this);
+        this.handleTapDown = this.handleTapDown.bind(this);
     }
     /**
      * 获取显示列表元素
@@ -87,7 +91,12 @@ export default class Carousel extends React.PureComponent<propsTypes> {
         return {
             transform: this.props.direction === "vertical" ? `translateY(-${100 * this.props.index}%)` : `translateX(-${100 * this.props.index}%)`,
             padding: this.props.contentPadding,
+            paddingTop: this.props.contentPaddingTop,
+            paddingBottom: this.props.contentPaddingBottom,
+            paddingLeft: this.props.contentPaddingLeft,
+            paddingRight: this.props.contentPaddingRight,
             visibility: index == this.props.index || index + 1 == this.props.index || index - 1 == this.props.index ? "visible" : "hidden",
+            display: this.props.direction === "vertical" ? "block" : "inline-block",
             verticalAlign: "top"
         }
     }
@@ -95,7 +104,8 @@ export default class Carousel extends React.PureComponent<propsTypes> {
         this.touchLock = true;
     }
     swiping(e:any, deltaX: number, deltaY: number, absX: number, absY: number, velocity: number) {
-        if (this.props.direction === "vertical") {
+        e.nativeEvent.preventDefault();
+        if (this.props.direction === "horizontal") {
             if (deltaX > 80 && velocity > 1 && this.touchLock) {
                 this.touchLock = false;
                 this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(1);
@@ -104,21 +114,27 @@ export default class Carousel extends React.PureComponent<propsTypes> {
                 this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(-1);
             }
         } else {
-            if (deltaX > 100 && velocity > 1 && this.touchLock) {
+            if (deltaY > 150 && velocity > 1 && this.touchLock) {
                 this.touchLock = false;
                 this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(1);
-            } else if (deltaX < -100 && velocity > 1 && this.touchLock) {
+            } else if (deltaY < -100 && velocity > 1 && this.touchLock) {
                 this.touchLock = false;
                 this.props.handleIndexChangeCallback && this.props.handleIndexChangeCallback(-1);
             }
         }
     }
+    handleTapDown(e: any) {
+        e.nativeEvent.stopImmediatePropagation();
+        e.nativeEvent.stopPropagation();
+    }
     render() {
         return (
             <SwipeView 
+                onTap={this.handleTapDown}
+                preventDefaultTouchmoveEvent={true}
                 onSwiping={this.swiping} className={(className as any).container}
                 onSwiped={this.swiped}>
-                <div style={{ flexDirection: this.props.direction === "vertical" ? "column" : "row" }}
+                <div style={{ flexDirection: this.props.direction === "horizontal" ? "column" : "row" }}
                     className={(className as any).contentBody}>
                     {this.contentBody.map((element: JSX.Element, index: number) => {
                         return <div key={index} className={(className as any).contentPage} style={this.style(index)}>{element}</div>

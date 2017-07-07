@@ -57,7 +57,8 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
             <div style={{ height: "100%" }}>
                 <Carousel
                     index={this.state.Carouselindex}
-                    handleIndexChangeCallback={this.handleIndexChangeCallback} direction={""}
+                    contentPaddingTop={"20%"}
+                    handleIndexChangeCallback={this.handleIndexChangeCallback} direction={"vertical"}
                     bottomNode={<StepProgressBar steps={steps} index={this.state.Carouselindex} width={250} />}>
                     <div data-index="11" style={{ height: "100%" }}>
                         <Avatar shape={"square"}>ZT</Avatar>
@@ -86,10 +87,6 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
                         <SnackBar active={true}></SnackBar>
                     </div>
                 </Carousel>
-
-
-
-
             </div>
         );
     }

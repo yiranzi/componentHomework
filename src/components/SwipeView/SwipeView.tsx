@@ -44,6 +44,9 @@ export default class SwipeView extends React.Component<SwipeViewPropsTypes, Stat
         swiping: false,
         start: 0,
     };
+    private readonly preventDefaultTouchmoveEventListener: any = function (ev: Event) {
+        event.preventDefault();
+    };
     public static defaultProps: Partial<SwipeViewPropsTypes> = {
         flickThreshold: 0.6,
         delta: 10,
@@ -70,12 +73,18 @@ export default class SwipeView extends React.Component<SwipeViewPropsTypes, Stat
     componentWillMount() {
         // setup internal swipeable state
         this.swipeable = this.state;
+        if (this.props.preventDefaultTouchmoveEvent) {
+            document.body.addEventListener('touchstart', this.preventDefaultTouchmoveEventListener as EventListenerObject);
+        }
     }
     componentWillUnmount() {
         if (this.props.trackMouse) {
             // just to be safe attempt removal
             document.removeEventListener('mousemove', this.mouseMove);
             document.removeEventListener('mouseup', this.mouseUp);
+        }
+        if (this.props.preventDefaultTouchmoveEvent) {
+            document.body.removeEventListener('touchstart', this.preventDefaultTouchmoveEventListener as EventListenerObject);
         }
     }
 
@@ -118,7 +127,7 @@ export default class SwipeView extends React.Component<SwipeViewPropsTypes, Stat
 
     eventMove(e: any) {
         const {
-      stopPropagation,
+            stopPropagation,
             delta,
             onSwiping,
             onSwipingLeft, onSwipedLeft,
@@ -126,7 +135,7 @@ export default class SwipeView extends React.Component<SwipeViewPropsTypes, Stat
             onSwipingUp, onSwipedUp,
             onSwipingDown, onSwipedDown,
             preventDefaultTouchmoveEvent,
-    } = this.props;
+        } = this.props;
 
         if (!this.swipeable.x || !this.swipeable.y || e.touches && e.touches.length > 1) {
             return;
@@ -166,7 +175,14 @@ export default class SwipeView extends React.Component<SwipeViewPropsTypes, Stat
 
         this.swipeable.swiping = true;
 
-        if (cancelablePageSwipe && preventDefaultTouchmoveEvent) e.preventDefault();
+        if (cancelablePageSwipe && preventDefaultTouchmoveEvent) {
+            e.preventDefault();
+            e.nativeEvent.preventDefault();
+            e.nativeEvent.stopImmediatePropagation();
+            document.querySelector('body').addEventListener('touchstart', function (ev) {
+                event.preventDefault();
+            })
+        }
     }
 
     eventEnd(e: any) {
