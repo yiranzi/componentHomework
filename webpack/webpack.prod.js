@@ -18,8 +18,7 @@ module.exports = webpackMerge([
                 "..",
                 "src",
                 "entrypoint.tsx"
-            ),
-            vendor: ['react', 'react-dom', 'lodash']
+            )
         },
         output: {
             path: path.join(__dirname, "..", "prod"),
@@ -36,12 +35,10 @@ module.exports = webpackMerge([
                 filename: 'index.html',
                 hash: true
             }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor'
-            }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'mainifest',
-                chunks: ['vendor']
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                manifest: require(path.join(__dirname, "..", "prod/vendors-manifest.json")),
+                name: 'dll'
             })
         ],
         devtool: false

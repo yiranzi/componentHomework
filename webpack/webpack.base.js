@@ -24,7 +24,7 @@ module.exports = {
                 use: {
                     loader: "awesome-typescript-loader",
                     options: {
-                        configFileName: "tsconfig.webpack.json",
+                        configFileName: process.env.NODE_ENV === "production" ? "tsconfig.webpack.prod.json" : "tsconfig.webpack.json",
                         // FIXME: needed for HMR but conflicts with `rootDir` in tsconfig.json
                         transpileOnly: true,
                         isolatedModules: true
@@ -46,6 +46,15 @@ module.exports = {
                     query: {
                         limit: 10000,
                         name: path.resolve(__dirname, '../dev/img/[name].[hash:7].[ext]')
+                    }
+                }
+            },
+            {
+                test: /\.(mp3)?$/,
+                use: {
+                    loader: 'url-loader',
+                    query: {
+                        name: path.resolve(__dirname, '../dev/audio/[name].[hash:7].[ext]')
                     }
                 }
             }

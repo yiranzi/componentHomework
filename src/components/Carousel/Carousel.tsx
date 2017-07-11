@@ -46,6 +46,7 @@ interface propsTypes {
  * @param {JSX.Element} bottomNode - [可选] 底部slot
  * @param {JSX.Element} rightNode - [可选] 右部slot
  * @param {JSX.Element} leftNode - [可选] 左部slot
+ * @param {JSX.Element} children - [可选] 最外部标签需要含有data-index参数，标明该标签的index
  */
 export default class Carousel extends React.PureComponent<propsTypes> {
     name: "SliderView"
@@ -61,7 +62,6 @@ export default class Carousel extends React.PureComponent<propsTypes> {
         super(props);
         this.swiping = this.swiping.bind(this);
         this.swiped = this.swiped.bind(this);
-        this.handleTapDown = this.handleTapDown.bind(this);
     }
     /**
      * 获取显示列表元素
@@ -104,7 +104,7 @@ export default class Carousel extends React.PureComponent<propsTypes> {
         this.touchLock = true;
     }
     swiping(e:any, deltaX: number, deltaY: number, absX: number, absY: number, velocity: number) {
-        e.nativeEvent.preventDefault();
+        console.log(velocity);
         if (this.props.direction === "horizontal") {
             if (deltaX > 80 && velocity > 1 && this.touchLock) {
                 this.touchLock = false;
@@ -123,14 +123,9 @@ export default class Carousel extends React.PureComponent<propsTypes> {
             }
         }
     }
-    handleTapDown(e: any) {
-        e.nativeEvent.stopImmediatePropagation();
-        e.nativeEvent.stopPropagation();
-    }
     render() {
         return (
             <SwipeView 
-                onTap={this.handleTapDown}
                 preventDefaultTouchmoveEvent={true}
                 onSwiping={this.swiping} className={(className as any).container}
                 onSwiped={this.swiped}>

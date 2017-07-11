@@ -5,8 +5,8 @@
  */
 
 
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 declare const $$webpack_dev: boolean;
 
@@ -18,13 +18,13 @@ type HMRModule = typeof module & {
     }
 }
 
-import * as m from './m';
+import * as m from "./m";
 
 if ($$webpack_dev && (module as HMRModule).hot) {
     // dev w/ HMR: hot-reload './m', './greeting' and re-render
 
     console.info("configuring webpack HMR");
-    console.info('m=', m);
+    console.info("m=", m);
     (module as HMRModule).hot.accept(["./m", "./components/demo"], function () {
         console.log("accept handler get called", [].slice.call(arguments));
         console.info("m=", m);

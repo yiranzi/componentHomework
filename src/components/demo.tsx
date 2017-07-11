@@ -15,9 +15,11 @@ import Carousel from "@/components/Carousel/Carousel";
 import Button from "@/components/Button/Button";
 import Avatar from "@/components/Avatar/Avatar";
 import Loading from "@/components/Loading/Loading";
+import SwipeView from "@/components/SwipeView/SwipeView";
 interface StateTypes {
-    index: number,
-    Carouselindex: number
+    index: number;
+    Carouselindex: number;
+    onplay: boolean;
 }
 /**
  * This module will be hot-reloaded and rendered upon modification.
@@ -30,9 +32,11 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
         this.clickhandle = this.clickhandle.bind(this);
         this.SnackBarClick = this.SnackBarClick.bind(this);
         this.handleIndexChangeCallback = this.handleIndexChangeCallback.bind(this);
+        this.handleTap = this.handleTap.bind(this);
         this.state = {
             index: 1,
-            Carouselindex: 0
+            Carouselindex: 0,
+            onplay: true
         };
     }
     clickhandle() {
@@ -44,13 +48,16 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
 
     }
     handleIndexChangeCallback(index: number) {
-        console.log("handleIndexChangeCallback",this.state.Carouselindex + index);
-        
         if (this.state.Carouselindex + index > -1 && this.state.Carouselindex + index < 5) {
             this.setState((prevState, props) => ({
                 Carouselindex: prevState.Carouselindex + index
             }));
         }
+    }
+    handleTap() {
+        this.setState((prevState, props) => ({
+           onPlay: prevState.onplay
+        }));
     }
     render() {
         return (
@@ -63,7 +70,7 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
                     <div data-index="11" style={{ height: "100%" }}>
                         <Avatar shape={"square"}>ZT</Avatar>
                     </div>
-                    <div data-index="1" style={{ height: "100%" }}>
+                    <div data-index="12" style={{ height: "100%" }}>
                         <Loading />
                     </div>
                     <div data-index="6" style={{ height: "100%" }}>

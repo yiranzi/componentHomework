@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-
+var $ = require('gulp-load-plugins')();
 gulp.task('default', function () {
     // 将你的默认的任务代码放在这
     console.log('this is glup task');
@@ -24,6 +24,17 @@ gulp.task('doc', function (cb) {
 
 });
 
+gulp.task('prod', function (cb) {
+    connect.server({
+        root: './prod',
+        port: 9000,
+        middleware: function () {
+            return [
+                require('connect-gzip').gzip()
+            ];
+        }
+    });
+})
 
 
 //压缩html
@@ -61,4 +72,9 @@ gulp.task('compress', function (cb) {
     );
 });
 
-gulp.task('build:prod', ['html', 'style', 'compress'], function () {});
+gulp.task('build:prod', ['html', 'style', 'compress'], function () {
+    return gulp.src('prod/*').pipe($.size({
+        title: 'build',
+        gzip: true
+    }));
+});

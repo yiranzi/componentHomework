@@ -16,9 +16,9 @@
         "pretty": true,
         "module": "commonjs",
         "importHelpers": true,
-        "baseUrl": ".",
+        "baseUrl": "src/",
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": ["./*"]
         }
     },
     "exclude": [
