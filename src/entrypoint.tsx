@@ -16,7 +16,7 @@ type HMRModule = typeof module & {
             callback: (updatedDependencies: any[]) => void): void
         accept(moduleName: string, callback: () => void): void
     }
-}
+};
 
 import * as m from "./m";
 
