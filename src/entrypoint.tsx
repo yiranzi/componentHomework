@@ -41,3 +41,9 @@ ReactDOM.render(
     </Greeting>,
     document.getElementById("app")
 );
+
+import WxSdk from "@/assets/js/jweixin";
+
+console.log(2131);
+
+console.log(WxSdk);

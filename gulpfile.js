@@ -73,8 +73,4 @@ gulp.task('compress', function (cb) {
 });
 
 gulp.task('build:prod', ['html', 'style', 'compress'], function () {
-    return gulp.src('prod/*').pipe($.size({
-        title: 'build',
-        gzip: true
-    }));
 });
