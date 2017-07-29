@@ -15,6 +15,7 @@ import Carousel from "@/components/Carousel/Carousel";
 import MyTabBar from "@/components/Tabbar/MyTabBar";
 import MyFollowBar from "@/components/Tabbar/MyFollowBar";
 import AbstractBox from "@/components/ClickBox/AbstractBox";
+import Box1 from "@/components/ClickBox/Box1";
 import AbsTabBar from "@/components/Tabbar/AbsTabBar";
 import Button from "@/components/Button/Button";
 import Avatar from "@/components/Avatar/Avatar";
@@ -41,7 +42,7 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
             index: 1,
             Carouselindex: 0,
             onplay: true,
-            setIndex: 0,
+            currentSelect: 0,
         };
     }
     clickhandle() {
@@ -68,7 +69,7 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
     cbfBarClick(index) {
         console.log('顶点得道点击' +index);
         this.setState({
-            setIndex: index,
+            currentSelect: index,
         });
     }
 
@@ -99,9 +100,14 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
         //     ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
         // ];
         return (<div>
-                <AbsTabBar count={3} cbfClick = {this.cbfBarClick} defaultStyle = {defaultStyle} clickStyle = {clickStyle}>
-                    <div style={userStyle}>123</div>
-                </AbsTabBar>
+                {/*<Box1 index = {0} cbfClick = {this.cbfClick}>123</Box1>*/}
+                <AbsTabBar currentSelect = {this.state.currentSelect} count={3} cbfClick = {this.cbfBarClick}><span>123</span></AbsTabBar>
+
+                {/*<AbsTabBar count={3} cbfClick = {this.cbfBarClick} defaultStyle = {defaultStyle} clickStyle = {clickStyle}>*/}
+                    {/*<div style={userStyle}>123</div>*/}
+                {/*// </AbsTabBar>*/}
+
+
                 {/*<AbstractBox index = {1} boxStyle={boxStyle} cbfClick={this.cbfTabClick}/>*/}
                 {/*<MyTabBar currentIndex = {this.state.setIndex} tabs = {tabs} cbfTabClick = {this.cbfTabClick}/>*/}
                 {/*<MyFollowBar currentIndex = {this.state.setIndex}/>*/}
