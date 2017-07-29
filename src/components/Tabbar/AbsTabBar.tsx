@@ -4,15 +4,18 @@
 
 import * as React from "react";
 import * as className from "./style/AbsTabBar.less";
-import * as AbstractBox from "@/components/ClickBox/AbstractBox";
+import AbstractBox from "@/components/ClickBox/AbstractBox";
 
 interface StateTypes {
     count: number,//外部样式
-    pressAddStyle: Object,
-    releaseAddStyle: Object,
-    coverAddStyle: Object,
+    defaultStyle: object,
+    clickStyle: Object,
+    releaseStyle: Object,
+    coverStyle: Object,
     currentSelect: number,
     cbfClick: Function,
+    cbfCover: Function,
+    //你还需要传入一个children
 }
 
 
@@ -21,68 +24,85 @@ export default class Tabbar extends React.Component<StateTypes> {
     constructor() {
         super();
         this.cbfClick = this.cbfClick.bind(this);
-        // this.cbfCover = this.cbfCover.bind(this);
+        this.addStyleByStatus = this.addStyleByStatus.bind(this);
         // this.cbfPress = this.cbfPress.bind(this);
         this.state = {
             ifPress: false,
             ifClick: false,
             ifCover: false,
+            currentSelect: -1,
+            status: 'default',
         };
     }
 
     render (){
         let index = this.props.index;
         return(<div>
-            <div>123</div>
-            {/*<AbstractBox key={1} index = {1}>123</AbstractBox>*/}
-            {/*{this.renderList()}*/}
+            {this.renderList()}
         </div>)
 
     },
 
     renderList() {
-        let boxStyle = {
-            width: '100px',
-            height: '100px',
-            backgroundColor: 'red',
-        };
         let arr = [];
         let node = this.props.children;
-        console.log(arr);
         // arr.push(<AbstractBox key={1} index = {1} boxStyle={boxStyle} >123</AbstractBox>)
         for (let i = 0 ; i < this.props.count; i++) {
-
-            // arr.push(<div key={i} style={this.addStyleByStatus()}>{node}</div>);
-            //这部分用凹槽暴露给外面
-            // arr.push(node);
-
-            // arr.push(<AbstractBox key={i} index = {i} boxStyle={boxStyle} cbfClick={this.cbfClick}>123</AbstractBox>);
-            // arr.push(<div>i</div>)
+            arr.push(<AbstractBox key={i} index = {i} boxStyle={this.addStyleByStatus(i)} cbfClick={this.cbfClick} cbfCover={this.cbfCover}>
+                    {node}
+            </AbstractBox>);
         }
-        console.log(arr);
         return arr;
     }
 
     cbfClick(index) {
-        console.log('bar' + index);
         this.props.cbfClick(index);
     }
 
-    addStyleByStatus() {
-        return {
-            color: 'red'
+    addStyleByStatus(index) {
+        console.log(this.props.defaultStyle);
+        let originStyle = this.props.defaultStyle;
+        let addStyle = {}
+        if(index === this.state.currentSelect) {
+            console.log(index)
+            switch(this.state.status){
+                case 'click':
+                    addStyle = this.props.clickStyle;
+                    break;
+                case 'cover':
+                    addStyle = this.props.coverStyle;
+                    break;
+            }
         }
-        // switch()
-    },
+        return this.addStyle(originStyle, addStyle);
+    }
+
+    addStyle(originStyle, addStyle) {
+        let copy1 = JSON.parse(JSON.stringify(originStyle));
+        for (let style in addStyle) {
+            copy1[style] = addStyle[style];
+        }
+        return copy1;
+    }
 
     cbfClick(index) {
-        console.log(index);
+        this.setState({
+            status: 'click',
+            currentSelect: index,
+        });
         this.props.cbfClick(index);
-    },
+    }
 
     cbfPress(index) {
 
-    },
+    }
+
+    cbfCover(index) {
+        this.setState({
+            status: 'cover',
+            currentSelect: index,
+        });
+    }
 
 }
 

@@ -36,7 +36,7 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
         this.clickhandle = this.clickhandle.bind(this);
         this.SnackBarClick = this.SnackBarClick.bind(this);
         this.handleIndexChangeCallback = this.handleIndexChangeCallback.bind(this);
-        this.handleTap = this.cbfBarClick.bind(this);
+        this.cbfBarClick = this.cbfBarClick.bind(this);
         this.state = {
             index: 1,
             Carouselindex: 0,
@@ -66,31 +66,42 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
     }
 
     cbfBarClick(index) {
-        console.log(this)
+        console.log('顶点得道点击' +index);
         this.setState({
             setIndex: index,
-        })
+        });
     }
 
 
     render() {
-        let boxStyle = {
+        // let boxStyle = {
+        //     width: '100px',
+        //     height: '100px',
+        //     backgroundColor: 'red',
+        //     border: '1px solid black',
+        // }
+        let clickStyle = {
+            backgroundColor: 'green',
+        }
+        let defaultStyle = {
             width: '100px',
             height: '100px',
             backgroundColor: 'red',
             border: '1px solid black',
+        };
+        let userStyle = {
+                width: '100px',
+                height: '100px',
         }
-        let tabs = [
-            ['./assetsPlus/image/home/tabbar0_0.png','./assetsPlus/image/home/tabbar0_1.png'],
-            ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
-            ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
-        ];
+        // let tabs = [
+        //     ['./assetsPlus/image/home/tabbar0_0.png','./assetsPlus/image/home/tabbar0_1.png'],
+        //     ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
+        //     ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
+        // ];
         return (<div>
-                <p>1</p>
-                <AbsTabBar/>
-                {/*<AbsTabBar count={3} cbfClick = {this.cbfBarClick}>*/}
-                    {/*<div>123</div>*/}
-                {/*</AbsTabBar>*/}
+                <AbsTabBar count={3} cbfClick = {this.cbfBarClick} defaultStyle = {defaultStyle} clickStyle = {clickStyle}>
+                    <div style={userStyle}>123</div>
+                </AbsTabBar>
                 {/*<AbstractBox index = {1} boxStyle={boxStyle} cbfClick={this.cbfTabClick}/>*/}
                 {/*<MyTabBar currentIndex = {this.state.setIndex} tabs = {tabs} cbfTabClick = {this.cbfTabClick}/>*/}
                 {/*<MyFollowBar currentIndex = {this.state.setIndex}/>*/}
