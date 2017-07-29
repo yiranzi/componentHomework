@@ -45,12 +45,16 @@ export default class Tabbar extends React.Component<StateTypes> {
             backgroundColor: 'red',
             border: '1px solid black',
         };
+        let styleBox = {
+            width: '100%',
+            height: '100%',
+        }
         let userStyle = {
                 width: '100px',
                 height: '100px',
             }
             let node = this.props.children;
-            return(        <AbstractBox status = {this.props.status} cbfClick = {this.cbfClick} cbfHover = {this.cbfHover} cbfHoverOut = {this.cbfHoverOut} index = {this.props.index} styleClick = {styleClick} styleDefault = {styleDefault} styleHover = {styleHover}>
+            return(        <AbstractBox styleBox = {styleBox} status = {this.props.status} cbfClick = {this.cbfClick} cbfHover = {this.cbfHover} cbfHoverOut = {this.cbfHoverOut} index = {this.props.index} styleClick = {styleClick} styleDefault = {styleDefault} styleHover = {styleHover}>
                 <div>{node}</div>
             </AbstractBox>)
 

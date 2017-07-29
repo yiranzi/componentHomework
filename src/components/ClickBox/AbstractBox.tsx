@@ -7,8 +7,8 @@ import * as className from "./style/AbstractBox.less";
 
 
 interface StateTypes {
-    boxStyle: Object,//定义样式的接口
-    indx: number,//设置index的接口
+    styleBox: Object,//定义操作相应区域样式(大小)的接口
+    index: number,//设置index的接口.(设置了就不会改变的,不应该放在state中)
     ifClick: Boolean
     cbfClick: Function,//点击事件回调接口
     cbfHover: Function,
@@ -39,16 +39,17 @@ export default class Tabbar extends React.Component<StateTypes> {
         };
     }
 
+    //className = {(className as any).container}
+
     render (){
         if(this.props.ifClick === false) {
 
         }
-        let index = this.props.index;
-        return(<div className = {(className as any).container} style={this.addStyleByStatus()}>
-            <div className = {(className as any).boxCollider}
-                 onClick={this.cbfClick.bind(this,index)}
-                onMouseOver={this.cbfHover.bind(this,index)}
-                onMouseOut = {this.cbfHoverOut.bind(this,index)}>
+        return(<div style={this.addStyleByStatus()}>
+            <div style = {this.props.styleBox}
+                 onClick={this.cbfClick}
+                onMouseOver={this.cbfHover}
+                onMouseOut = {this.cbfHoverOut}>
                 {this.props.children}
             </div>
         </div>)
@@ -56,8 +57,7 @@ export default class Tabbar extends React.Component<StateTypes> {
     },
 
 
-    addStyleByStatus(index) {
-        console.log('111111')
+    addStyleByStatus() {
         let originStyle = this.props.styleDefault;
         let addStyle = {}
             switch(this.props.status){
@@ -81,16 +81,17 @@ export default class Tabbar extends React.Component<StateTypes> {
         return copy1;
     }
 
-    cbfHover(index) {
+    cbfHover() {
+        let index = this.props.index;
         // if(this.state.status==='click'){
         //     return
         // }
         // this.setState({status: 'hover'});
         this.props.cbfHover(index)
-        console.log(index)
     }
 
     cbfHoverOut(index) {
+        let index = this.props.index;
         // if(this.state.status==='click'){
         //     return
         // }
@@ -99,6 +100,7 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     cbfClick(index) {
+        let index = this.props.index;
         // this.setState({
         //     currentSelect: index,
         //     status: 'click'});
