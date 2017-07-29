@@ -3,9 +3,10 @@
  */
 
 import * as React from "react";
+import * as className from "./style/AbstractBox.less";
 
 interface StateTypes {
-    boxStyle: {},
+    boxStyle: {},//外部样式
     indx: number,
     cbfClick: function,
     cbfCover: function,
@@ -28,8 +29,9 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     render (){
+
         let index = this.props.index;
-        return(<div className="tabbar" style={this.props.boxStyle}>
+        return(<div classname = {(className as any).container} style={this.props.boxStyle}>
             <div onClick={this.cbfClick.bind(this,index)}></div>
         </div>)
 
