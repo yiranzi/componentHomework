@@ -12,6 +12,7 @@ interface StateTypes {
     cbfClick: Function,//点击事件回调接口
     cbfHover: Function,
     cbfPress: Function,
+    title: String,//可选标题
 }
 
 
@@ -48,8 +49,9 @@ export default class Tabbar extends React.Component<StateTypes> {
                 width: '100px',
                 height: '100px',
             }
+            let node = this.props.children;
             return(        <AbstractBox status = {this.props.status} cbfClick = {this.cbfClick} cbfHover = {this.cbfHover} cbfHoverOut = {this.cbfHoverOut} index = {this.props.index} styleClick = {styleClick} styleDefault = {styleDefault} styleHover = {styleHover}>
-                {this.props.children}
+                <div>{node}</div>
             </AbstractBox>)
 
         // let index = this.props.index;

@@ -18,6 +18,7 @@ interface StateTypes {
     stylePress: Object,
     styleDefault: Object,
     status: String,
+    title: String,//可选标题
 }
 
 

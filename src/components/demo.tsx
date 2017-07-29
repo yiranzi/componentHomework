@@ -99,9 +99,11 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
         //     ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
         //     ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
         // ];
+        let dataTitle = ['aaa','B','Ccc','dd'];
         return (<div>
+
                 {/*<Box1 index = {0} cbfClick = {this.cbfClick}>123</Box1>*/}
-                <AbsTabBar currentSelect = {this.state.currentSelect} count={3} cbfClick = {this.cbfBarClick}><span>123</span></AbsTabBar>
+                <AbsTabBar currentSelect = {this.state.currentSelect} count={4} dataTitle = {dataTitle} cbfClick = {this.cbfBarClick}><span>123</span></AbsTabBar>
 
                 {/*<AbsTabBar count={3} cbfClick = {this.cbfBarClick} defaultStyle = {defaultStyle} clickStyle = {clickStyle}>*/}
                     {/*<div style={userStyle}>123</div>*/}

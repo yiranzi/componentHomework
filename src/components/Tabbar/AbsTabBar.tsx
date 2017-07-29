@@ -16,6 +16,7 @@ interface StateTypes {
     currentIndex: number,
     cbfClick: Function,
     cbfCover: Function,
+    dataTitle: Object,
     //你还需要传入一个children
 }
 
@@ -51,11 +52,12 @@ export default class Tabbar extends React.Component<StateTypes> {
         let arr = [];
         // arr.push(<AbstractBox key={1} index = {1} boxStyle={boxStyle} >123</AbstractBox>)
         for (let i = 0 ; i < this.props.count; i++) {
+            let titleNode = <span>{this.props.dataTitle[i]}</span>
             arr.push(<Box1 key={i} index = {i} status = {this.calcStatus(i)}
                                   cbfClick={this.cbfClick}
                                   cbfHover={this.cbfHover}
                            cbfHoverOut = {this.cbfHoverOut}>
-                    {this.props.children}
+                    {titleNode}
             </Box1>);
         }
         return arr;
