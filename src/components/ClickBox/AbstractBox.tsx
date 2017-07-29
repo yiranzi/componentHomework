@@ -5,12 +5,13 @@
 import * as React from "react";
 import * as className from "./style/AbstractBox.less";
 
+
 interface StateTypes {
-    boxStyle: {},//外部样式
+    boxStyle: Object,//外部样式
     indx: number,
-    cbfClick: function,
-    cbfCover: function,
-    cbfPress: function,
+    cbfClick: Function,
+    cbfCover: Function,
+    cbfPress: Function,
 }
 
 
@@ -29,17 +30,21 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     render (){
-
         let index = this.props.index;
-        return(<div classname = {(className as any).container} style={this.props.boxStyle}>
-            <div onClick={this.cbfClick.bind(this,index)}></div>
+        return(<div className = {(className as any).container} style={this.props.boxStyle}>
+            <div className = {(className as any).boxCollider} onClick={this.cbfClick.bind(this,index)}></div>
         </div>)
 
     },
 
     cbfClick(index) {
+        console.log('ab box click');
         console.log(index);
-        this.props.cbfTabClick(index);
+        this.props.cbfClick(index);
+    },
+
+    cbfPress(index) {
+
     },
 
 }

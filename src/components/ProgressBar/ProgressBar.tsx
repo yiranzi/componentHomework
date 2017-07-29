@@ -29,7 +29,7 @@ export default class ProgressBar extends React.PureComponent<ProgressBarPropsTyp
     };
     render() {
         return (
-            <div className={(className as any).container} style={{width: this.props.width}}>
+            <div className={(className as any).container} style={{width: this.props.width, height: 2}}>
                 <Progress length={this.props.progress} isLoading={this.props.isLoading}/>
                 <ProgressMax length={100 - this.props.buffer} isLoading={this.props.isLoading}/>
                 <ProgressBuffer length={this.props.buffer} isLoading={this.props.isLoading}/>
