@@ -3,10 +3,9 @@
  */
 
 import * as React from "react";
-import * as className from "./style/AbsTabBar.less";
-import AbstractBox from "@/components/ClickBox/AbstractBox";
 import Box1 from "@/components/ClickBox/Box1";
 
+//计算tabbar内的结果.上报click事件
 interface StateTypes {
     //逻辑
     count: number,//按钮数量
@@ -16,12 +15,6 @@ interface StateTypes {
     //填充内容
     dataIcon: Array,//icon数组
     dataTitle: Array,//标题数组
-    // //定义样式
-    // status: String,//表示tabbar所处的状态
-    // styleBox: Object,//操作区域
-    // styleClick: Object,//选中
-    // styleHover: Object,//移动
-    // stylePress: Object,//按下的时候
     styleDefault: Object,//默认
 }
 
@@ -31,13 +24,7 @@ export default class Tabbar extends React.Component<StateTypes> {
         super();
         this.cbfClick = this.cbfClick.bind(this);
         this.cbfHover = this.cbfHover.bind(this);
-        // this.cbfHoverOut = this.cbfHoverOut.bind(this);
-        // this.calcStatus = this.calcStatus.bind(this);
-        // this.cbfPress = this.cbfPress.bind(this);
         this.state = {
-            ifPress: false,
-            ifClick: false,
-            ifCover: false,
             currentIndex: -1,
             currentFire: -1,
             status: 'default',
@@ -45,25 +32,25 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     render (){
-        let index = this.props.index;
+        console.log('getttttttttt')
+        console.log(this.props.styleDefault)
         return(<div style = {this.props.styleDefault}>
-            {this.renderList()}
+            {this.renderBars()}
         </div>)
 
     }
 
-    renderList() {
-        console.log('!!!!!!!');
+    renderBars() {
         let arr = [];
-        // arr.push(<AbstractBox key={1} index = {1} boxStyle={boxStyle} >123</AbstractBox>)
+
         for (let i = 0 ; i < this.props.count; i++) {
-            let titleNode = <span>{this.props.dataTitle[i]}</span>
-            arr.push(<Box1 key={i} index = {i} status = {this.calcStatus(i)}
-                                  cbfClick={this.cbfClick}
-                                  cbfHover={this.cbfHover}
-                           cbfHoverOut = {this.cbfHoverOut}>
-                    {titleNode}
-            </Box1>);
+            arr.push(<Box1
+                key={i}
+                index = {i}
+                status = {this.calcStatus(i)}
+                cbfClick={this.cbfClick}
+                cbfHover={this.cbfHover}
+                title = {this.props.dataTitle[i]}/>)
         }
         return arr;
     }
@@ -73,11 +60,14 @@ export default class Tabbar extends React.Component<StateTypes> {
         //如果这个index 是被点击的那个
         if(this.state.currentIndex === index) {
             return 'click';
+        } else {
+            //如果这个index 什么都没触发
+            return 'default'
         }
         //如果这个index 是被覆盖的那个
-        if(this.state.currentFire === index) {
-            return 'hover';
-        }
+        // if(this.state.currentFire === index) {
+        //     return 'hover';
+        // }
         //如果这个index 什么都没触发
         return 'default'
     }
@@ -99,14 +89,6 @@ export default class Tabbar extends React.Component<StateTypes> {
             currentFire: index,
         })
     }
-    // cbfHoverOut(index) {
-    //     console.log('cbfHoverOut');
-    // }
-    //
-    // cbfPress(index) {
-    //
-    // }
-
 }
 
 

@@ -25,25 +25,22 @@ export default class Tabbar extends React.Component<StateTypes> {
 
     render (){
         let styleClick = {
-            backgroundColor: 'green',
+            color: 'white',
         }
         let styleHover = {
-            backgroundColor: 'blue',
+            color: 'orange',
         }
         let styleDefault = {
             width: '100px',
             height: '100px',
-            backgroundColor: 'red',
-            border: '1px solid black',
+            backgroundColor: 'blue',
+            borderBottom: '1px solid black',
+            color: '#6F7D9F',
         };
         let styleBox = {
             width: '100%',
             height: '100%',
         }
-        let userStyle = {
-                width: '100px',
-                height: '100px',
-            }
             return(        <AbstractBox styleBox = {styleBox}
                                         styleClick = {styleClick}
                                         styleDefault = {styleDefault}
@@ -55,19 +52,7 @@ export default class Tabbar extends React.Component<StateTypes> {
                                         index = {this.props.index}
                                         title = {this.props.title}>
             </AbstractBox>)
-
-        // let index = this.props.index;
-        // return(<div className = {(className as any).container} style={this.props.boxStyle}>
-        //     <div className = {(className as any).boxCollider}
-        //          onClick={this.cbfClick.bind(this,index)}
-        //         onMouseOver={this.cbfHover.bind(this,index)}>
-        //         {this.props.children}
-        //     </div>
-        // </div>)
-
-    },
-
-
+    }
 }
 
 
