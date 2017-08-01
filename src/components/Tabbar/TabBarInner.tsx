@@ -3,7 +3,7 @@
  */
 
 import * as React from "react";
-import Box1 from "@/components/ClickBox/Box1";
+import BoxInner from "@/components/ClickBox/BoxInner";
 
 //计算tabbar内的结果.上报click事件
 interface StateTypes {
@@ -42,9 +42,12 @@ export default class Tabbar extends React.Component<StateTypes> {
 
     renderBars() {
         let arr = [];
-
+        console.log(this.props.arrayIndex);
         for (let i = 0 ; i < this.props.count; i++) {
-            arr.push(<Box1
+            let array = this.props.arrayIndex.slice();
+            array.push(i);
+            arr.push(<BoxInner
+                arrayIndex={array}
                 key={i}
                 index = {i}
                 status = {this.calcStatus(i)}
@@ -58,7 +61,8 @@ export default class Tabbar extends React.Component<StateTypes> {
     //根据回调带来的结果,确定按钮的样式.
     calcStatus(index) {
         //如果这个index 是被点击的那个
-        if(this.state.currentIndex === index) {
+        console.log('!!!!!!!!!!!!!!!')
+        if(this.state.currentIndex === index && this.props.status === 'click') {
             return 'click';
         } else {
             //如果这个index 什么都没触发
@@ -73,17 +77,18 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     //接受点击的回调
-    cbfClick(index) {
+    cbfClick(index,arrayIndex) {
         this.setState({
             status: 'click',
             currentIndex: index,
             currentFire: index,
         });
-        this.props.cbfClick(index);
+        this.props.cbfClick(this.props.index,arrayIndex);
     }
 
     //接受覆盖的回调
-    cbfHover(index) {
+    cbfHover(arrayIndex) {
+        let index = arrayIndex
         this.setState({
             status: 'hover',
             currentFire: index,

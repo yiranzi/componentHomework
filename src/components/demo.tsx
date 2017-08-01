@@ -21,7 +21,7 @@ import Loading from "@/components/Loading/Loading";
 import SwipeView from "@/components/SwipeView/SwipeView";
 
 import AbstractBox from "@/components/ClickBox/AbstractBox";
-import Box1 from "@/components/ClickBox/Box1";
+import Box1 from "@/ClickBox/BoxInner";
 import AbsTabBar from "@/components/Tabbar/AbsTabBar";
 import TabBar1 from "@/components/Tabbar/TabBar1";
 import TabBarMaxOut from "@/components/Tabbar/TabBarMaxOut";
@@ -70,8 +70,8 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
         }));
     }
 
-    cbfBarClick(index) {
-        console.log('顶点得道点击' +index);
+    cbfBarClick(index,arrayIndex) {
+        console.log('顶点得道点击' +index+arrayIndex);
         this.setState({
             currentIndex: index,
         });

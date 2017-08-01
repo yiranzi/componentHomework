@@ -31,6 +31,9 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     render (){
+        console.log('boxofTab!!!!!!!!!');
+        console.log(this.props.arrayIndex);
+
         let styleClick = {
             backgroundColor: 'green',
         }
@@ -76,7 +79,8 @@ export default class Tabbar extends React.Component<StateTypes> {
             status = {this.props.status}
             cbfHover={this.props.cbfHover}
 
-            cbfClick={this.cbfTitleTabClick}/>)
+            cbfClick={this.cbfTitleTabClick}
+            arrayIndex = {this.props.arrayIndex}/>)
 
     }
 
@@ -111,6 +115,9 @@ export default class Tabbar extends React.Component<StateTypes> {
         };
         return(
             <TabBarInner
+                status = {this.props.status}
+
+                arrayIndex = {this.props.arrayIndex}
                 styleDefault = {styleDefault}
                 currentIndex = {this.state.currentIndex}
                 count={count}
@@ -120,16 +127,18 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     //接收到点击
-    cbfTitleTabClick(index) {
+    cbfTitleTabClick(index,arrayIndex) {
         console.log('title ' + this.props.index);
-        this.props.cbfClick(this.props.index);
+        this.props.cbfClick(this.props.index,arrayIndex);
         this.state.isSubShow = !this.state.isSubShow
         this.setState({isSubShow: this.state.isSubShow})
     }
 
 
-
-    cbfInnerBarClick(index) {
+    //接收到子组件点击
+    cbfInnerBarClick(index,arrayIndex) {
+        //默认上报.
+        this.props.cbfClick(this.props.index,arrayIndex);
         console.log('sub ' + this.props.index + ' get' + index);
         // this.props.cbfSubTabClick(10 * this.props.index + index);
     }

@@ -24,6 +24,8 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     render (){
+        console.log('box1');
+        console.log(this.props.arrayIndex);
         let styleClick = {
             backgroundColor: 'green',
         }
@@ -53,7 +55,8 @@ export default class Tabbar extends React.Component<StateTypes> {
                                         cbfClick = {this.props.cbfClick}
                                         cbfHover = {this.props.cbfHover}
                                         index = {this.props.index}
-                                        title = {this.props.title}>
+                                        title = {this.props.title}
+                                        arrayIndex = {this.props.arrayIndex}>
             </AbstractBox>)
 
         // let index = this.props.index;

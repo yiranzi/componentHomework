@@ -7,6 +7,7 @@ import BoxContain from "@/components/ClickBox/BoxContain";
 
 //计算tabbar内的结果.上报click事件
 interface StateTypes {
+    subStatus: String,
     //逻辑
     count: number,//按钮数量
     currentIndex: number,//当前选中的按钮
@@ -41,6 +42,8 @@ export default class Tabbar extends React.Component<StateTypes> {
     renderBars() {
         let arr = [];
         for (let i = 0 ; i < this.props.count; i++) {
+            let array = [];
+            array.push(i);
             arr.push(<BoxContain
                 sub = {this.props.sub}
                     key={i}
@@ -48,7 +51,8 @@ export default class Tabbar extends React.Component<StateTypes> {
                    index = {i}
                    status = {this.calcStatus(i)}
                    cbfClick={this.cbfClick}
-                   cbfHover={this.cbfHover}/>)
+                   cbfHover={this.cbfHover}
+                    arrayIndex = {array}/>)
         }
         return arr;
     }
@@ -68,13 +72,13 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     //接受点击的回调
-    cbfClick(index) {
+    cbfClick(index,arrayIndex) {
         this.setState({
             status: 'click',
             currentIndex: index,
             currentFire: index,
         });
-        this.props.cbfClick(index);
+        this.props.cbfClick(index,arrayIndex);
     }
 
     //接受覆盖的回调

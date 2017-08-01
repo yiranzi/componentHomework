@@ -5,7 +5,7 @@
 import * as React from "react";
 import * as className from "./style/AbsTabBar.less";
 import AbstractBox from "@/components/ClickBox/AbstractBox";
-import Box1 from "@/components/ClickBox/Box1";
+import Box1 from "@/../ClickBox/BoxInner";
 
 interface StateTypes {
     //逻辑

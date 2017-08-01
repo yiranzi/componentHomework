@@ -3,7 +3,6 @@
  */
 
 import * as React from "react";
-import * as className from "./style/AbstractBox.less";
 
 
 interface StateTypes {
@@ -38,8 +37,6 @@ export default class Tabbar extends React.Component<StateTypes> {
         // this.cbfPress = this.cbfPress.bind(this);
         this.state = {
             status: 'default',
-            ifPress: false,
-            ifCover: false,
         };
     }
 
@@ -103,8 +100,7 @@ export default class Tabbar extends React.Component<StateTypes> {
         // this.props.cbfHover(index)
     }
 
-    cbfHoverOut(index) {
-        let index = this.props.index;
+    cbfHoverOut() {
         if(this.state.status==='click'){
             return
         }
@@ -112,12 +108,14 @@ export default class Tabbar extends React.Component<StateTypes> {
         // this.props.cbfHoverOut(index)
     }
 
-    cbfClick(index) {
+    cbfClick() {
+        console.log('AAAAAAAAAAAAAa')
         let index = this.props.index;
+        let arrayIndex = this.props.arrayIndex;
         // this.setState({
         //     currentSelect: index,
         //     status: 'click'});
-        this.props.cbfClick(index);
+        this.props.cbfClick(index,arrayIndex);
     },
 
     cbfPress(index) {
