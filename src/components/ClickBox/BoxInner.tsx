@@ -19,7 +19,9 @@ interface StateTypes {
 
 // export default class Tabbar extends React.PureComponent<StateTypes> {
 export default class Tabbar extends React.Component<StateTypes> {
+
     constructor() {
+        this.cbfClick = this.cbfClick.bind(this);
         super();
     }
 
@@ -52,8 +54,7 @@ export default class Tabbar extends React.Component<StateTypes> {
                                         styleHover = {styleHover}
 
                                         status = {this.props.status}
-                                        cbfClick = {this.props.cbfClick}
-                                        cbfHover = {this.props.cbfHover}
+                                        cbfClick = {this.cbfClick}
                                         index = {this.props.index}
                                         title = {this.props.title}
                                         arrayIndex = {this.props.arrayIndex}>
@@ -68,7 +69,13 @@ export default class Tabbar extends React.Component<StateTypes> {
         //     </div>
         // </div>)
 
-    },
+    }
+
+    cbfClick(index,arrayIndex) {
+        console.log()
+        let type = 'choose';
+        this.props.cbfClick(index,arrayIndex)
+    }
 
 
 }

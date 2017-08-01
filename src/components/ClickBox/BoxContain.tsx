@@ -7,6 +7,9 @@ import * as className from "./style/AbstractBox.less";
 import BoxTitle from "@/components/ClickBox/BoxTitle";
 import TabBarInner from "@/components/Tabbar/TabBarInner";
 
+//设置currentIndex(bar点击)
+//处理拉伸表色(title点击)
+
 interface StateTypes {
     index: number,
     cbfClick: Function,//点击事件回调接口
@@ -24,7 +27,7 @@ export default class Tabbar extends React.Component<StateTypes> {
         this.cbfTitleTabClick = this.cbfTitleTabClick.bind(this);
         this.cbfInnerBarClick = this.cbfInnerBarClick.bind(this);
         this.state = {
-            currentIndex: 0,
+            currentIndex: -1,
             isSubShow: false,
             foldHeight: 0,
         };
@@ -128,19 +131,18 @@ export default class Tabbar extends React.Component<StateTypes> {
 
     //接收到点击
     cbfTitleTabClick(index,arrayIndex) {
-        console.log('title ' + this.props.index);
-        this.props.cbfClick(this.props.index,arrayIndex);
+        // this.props.cbfClick(this.props.index,arrayIndex);
         this.state.isSubShow = !this.state.isSubShow
         this.setState({isSubShow: this.state.isSubShow})
     }
 
 
     //接收到子组件点击
-    cbfInnerBarClick(index,arrayIndex) {
+    cbfInnerBarClick(subIndex,arrayIndex) {
+        let index = this.props.index;
         //默认上报.
-        this.props.cbfClick(this.props.index,arrayIndex);
-        console.log('sub ' + this.props.index + ' get' + index);
-        // this.props.cbfSubTabClick(10 * this.props.index + index);
+        this.setState({currentIndex: subIndex})
+        this.props.cbfClick(index,arrayIndex);
     }
 
 }

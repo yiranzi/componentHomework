@@ -55,6 +55,12 @@ export default class Tabbar extends React.Component<StateTypes> {
             >
             </AbstractBox>)
     }
+
+    cbfClick() {
+        console.log(arguments)
+        let type = 'awake';
+        this.props.cbfClibk(arguments,type)
+    }
 }
 
 

@@ -115,7 +115,7 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
         return (<div>
                 {/*<Box1 index = {0} cbfClick = {this.cbfClick}>123</Box1>*/}
                 {/*<TabBar1 currentIndex = {this.state.currentIndex} count={4} dataTitle = {dataTitle} cbfClick = {this.cbfBarClick}></TabBar1>*/}
-                <TabBarMaxOut sub = {sub} defaultStyle = {defaultStyle} currentIndex = {this.state.currentIndex} count={4} dataTitle = {dataTitle} cbfClick = {this.cbfBarClick}></TabBarMaxOut>
+                <TabBarMaxOut status= {'click'}sub = {sub} defaultStyle = {defaultStyle} currentIndex = {this.state.currentIndex} count={4} dataTitle = {dataTitle} cbfClick = {this.cbfBarClick}></TabBarMaxOut>
 
                 {/*<AbsTabBar count={3} cbfClick = {this.cbfBarClick} defaultStyle = {defaultStyle} clickStyle = {clickStyle}>*/}
                     {/*<div style={userStyle}>123</div>*/}

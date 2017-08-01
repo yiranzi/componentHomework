@@ -7,6 +7,7 @@ import BoxInner from "@/components/ClickBox/BoxInner";
 
 //计算tabbar内的结果.上报click事件
 interface StateTypes {
+    status: String,//tabbar底层的bar需要这个status来决定状态.这里直接用到了status数值.没传给替曾
     //逻辑
     count: number,//按钮数量
     currentIndex: number,//当前选中的按钮
@@ -22,17 +23,16 @@ interface StateTypes {
 export default class Tabbar extends React.Component<StateTypes> {
     constructor() {
         super();
-        this.cbfClick = this.cbfClick.bind(this);
-        this.cbfHover = this.cbfHover.bind(this);
-        this.state = {
-            currentIndex: -1,
-            currentFire: -1,
-            status: 'default',
-        };
+        // this.cbfClick = this.cbfClick.bind(this);
+        // this.cbfHover = this.cbfHover.bind(this);
+        // this.state = {
+            // currentIndex: -1,
+            // currentFire: -1,
+            // status: 'default',
+        // };
     }
 
     render (){
-        console.log('getttttttttt')
         console.log(this.props.styleDefault)
         return(<div style = {this.props.styleDefault}>
             {this.renderBars()}
@@ -51,7 +51,7 @@ export default class Tabbar extends React.Component<StateTypes> {
                 key={i}
                 index = {i}
                 status = {this.calcStatus(i)}
-                cbfClick={this.cbfClick}
+                cbfClick={this.props.cbfClick}
                 cbfHover={this.cbfHover}
                 title = {this.props.dataTitle[i]}/>)
         }
@@ -62,7 +62,7 @@ export default class Tabbar extends React.Component<StateTypes> {
     calcStatus(index) {
         //如果这个index 是被点击的那个
         console.log('!!!!!!!!!!!!!!!')
-        if(this.state.currentIndex === index && this.props.status === 'click') {
+        if(this.props.currentIndex === index && this.props.status === 'click') {
             return 'click';
         } else {
             //如果这个index 什么都没触发
@@ -77,23 +77,30 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     //接受点击的回调
-    cbfClick(index,arrayIndex) {
-        this.setState({
-            status: 'click',
-            currentIndex: index,
-            currentFire: index,
-        });
-        this.props.cbfClick(this.props.index,arrayIndex);
-    }
+    // cbfClick(index,arrayIndex) {
+    //     let
+    //     this.props.cbfClick(this.props.index,arrayIndex,index);
+        // if(type === 'choose') {
+        //     this.setState({
+        //         currentIndex: index,
+        //     });
+        //     this.props.cbfClick(this.props.index,arrayIndex,type);
+        // }
+        // else if(type === 'awake') {
+        //     this.setState({
+        //         status: 'click',
+        //     });
+        // }
+    // }
 
     //接受覆盖的回调
-    cbfHover(arrayIndex) {
-        let index = arrayIndex
-        this.setState({
-            status: 'hover',
-            currentFire: index,
-        })
-    }
+    // cbfHover(arrayIndex) {
+    //     let index = arrayIndex
+    //     this.setState({
+    //         status: 'hover',
+    //         currentFire: index,
+    //     })
+    // }
 }
 
 
