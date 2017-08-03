@@ -8,7 +8,6 @@ import BoxContain from "@/components/ClickBox/BoxContain";
 //计算tabbar内的结果.上报click事件.等待更新currentIndex
 interface StateTypes {
     status: String,
-    // subStatus: String,
     //逻辑
     count: number,//按钮数量
     currentIndex: number,//当前选中的按钮
@@ -24,11 +23,8 @@ interface StateTypes {
 export default class Tabbar extends React.Component<StateTypes> {
     constructor() {
         super();
-        // this.cbfClick = this.cbfClick.bind(this);
-        // this.cbfHover = this.cbfHover.bind(this);
         this.state = {
             currentIndex: -1,
-            currentFire: -1,
             status: 'default',
         };
     }
@@ -67,30 +63,7 @@ export default class Tabbar extends React.Component<StateTypes> {
             //如果这个index 什么都没触发
             return 'default'
         }
-        //如果这个index 是被覆盖的那个
-        // if(this.state.currentFire === index) {
-        //     return 'hover';
-        // }
-
     }
-
-    // //接受点击的回调
-    // cbfClick(index,arrayIndex) {
-    //     this.setState({
-    //         // status: 'click',
-    //         currentIndex: index,
-    //         // currentFire: index,
-    //     });
-    //     this.props.cbfClick(index,arrayIndex);
-    // }
-
-    //接受覆盖的回调
-    // cbfHover(index) {
-    //     this.setState({
-    //         status: 'hover',
-    //         currentFire: index,
-    //     })
-    // }
 }
 
 

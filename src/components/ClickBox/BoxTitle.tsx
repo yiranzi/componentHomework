@@ -28,12 +28,12 @@ export default class Tabbar extends React.Component<StateTypes> {
             color: 'white',
         }
         let styleHover = {
-            color: 'orange',
+            color: 'white',
         }
         let styleDefault = {
-            width: '100px',
-            height: '100px',
-            backgroundColor: 'blue',
+            width: '100%',
+            height: '42px',
+            // backgroundColor: 'blue',
             borderBottom: '1px solid black',
             color: '#6F7D9F',
         };

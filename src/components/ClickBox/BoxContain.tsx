@@ -34,30 +34,6 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     render (){
-        console.log('boxofTab!!!!!!!!!');
-        console.log(this.props.arrayIndex);
-
-        let styleClick = {
-            backgroundColor: 'green',
-        }
-        let styleHover = {
-            backgroundColor: 'blue',
-        }
-        let styleDefault = {
-            width: '100px',
-            height: '100px',
-            backgroundColor: 'red',
-            border: '1px solid black',
-        };
-        let styleBox = {
-            width: '100%',
-            height: '100%',
-        }
-        let userStyle = {
-            width: '100px',
-            height: '100px',
-        }
-
         return(<div>
             {this.renderUpStreamBox()}
             {this.renderTabBarInner()}
@@ -107,15 +83,19 @@ export default class Tabbar extends React.Component<StateTypes> {
         let renderCount = this.state.isSubShow ? count : 0;
         let dataTitle = this.props.sub[this.props.index].dataTitle;
         console.log(dataTitle)
-        let perBarHeight = 100;
+        let perBarHeight = 42;
         let styleDefault = {
-            width: '100px',
+            // width: '100px',
             height: `${renderCount*perBarHeight}px`,
-            backgroundColor: 'gray',
-            border: '1px solid green',
+            // backgroundColor: 'gray',
+            // border: '1px solid green',
+            // height: 'auto',
             overflow: 'hidden',
             transition: 'height 0.4s'
         };
+        // if(!this.state.isSubShow) {
+        //     styleDefault['height'] = 0;
+        // }
         return(
             <TabBarInner
                 status = {this.props.status}

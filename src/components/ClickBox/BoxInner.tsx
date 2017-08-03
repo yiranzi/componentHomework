@@ -29,25 +29,31 @@ export default class Tabbar extends React.Component<StateTypes> {
         console.log('box1');
         console.log(this.props.arrayIndex);
         let styleClick = {
-            backgroundColor: 'green',
+            color: 'white',
+            backgroundColor: '#242c4A',
+            borderLeft:  '3px solid#5d71d1',
+            borderRight:  '0px',
+            paddingLeft:  '17px',
         }
         let styleHover = {
-            backgroundColor: 'blue',
+            color: 'white',
         }
         let styleDefault = {
-            width: '100px',
-            height: '100px',
-            backgroundColor: 'red',
-            border: '1px solid black',
+            fontSize: '14px',
+            lineHeight: '42px',
+            height: '42px',
+            padding: '0 0 0 20px',
+            color: '#6F7D9F',
+            width: '100%',
+            // height: '100px',
+            // backgroundColor: 'red',
+            // border: '1px solid black',
         };
         let styleBox = {
             width: '100%',
             height: '100%',
         }
-        let userStyle = {
-                width: '100px',
-                height: '100px',
-            }
+
             return(        <AbstractBox styleBox = {styleBox}
                                         styleClick = {styleClick}
                                         styleDefault = {styleDefault}

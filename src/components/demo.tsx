@@ -47,6 +47,7 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
             Carouselindex: 0,
             onplay: true,
             currentIndex: 0,
+            arrayIndex: 0,
         };
     }
     clickhandle() {
@@ -74,19 +75,22 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
         console.log('顶点得道点击' +index+arrayIndex);
         this.setState({
             currentIndex: index,
+            arrayIndex: arrayIndex,
         });
     }
 
 
     render() {
         let count = 4;
-        let perBarHeight = 100;
+        //定义tabbar样式
+        let perBarHeight = 42;
         let defaultStyle = {
-            width: '100px',
-            height: `${count*perBarHeight}px`,
-            backgroundColor: 'gray',
-            border: '1px solid green',
+            width: '300px',
+            // height: `${count*perBarHeight}px`,
+            backgroundColor: '#333C60',
+            // border: '1px solid green',
         };
+        //定义整个数据
         let dataTitle = ['语文','数学','英语','编程'];
         let sub = [
             {
@@ -105,17 +109,39 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
                 count: 4,
                 dataTitle: ['学前班编程','小学编程','中学编程','大学编程']
             }
-        ]
+        ];
+
+        //从服务器得到的渲染列表.
+
+
         // let tabs = [
         //     ['./assetsPlus/image/home/tabbar0_0.png','./assetsPlus/image/home/tabbar0_1.png'],
         //     ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
         //     ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
         // ];
-
+        let sub2 = ['a','b','c','d'];
         return (<div>
                 {/*<Box1 index = {0} cbfClick = {this.cbfClick}>123</Box1>*/}
                 {/*<TabBar1 currentIndex = {this.state.currentIndex} count={4} dataTitle = {dataTitle} cbfClick = {this.cbfBarClick}></TabBar1>*/}
-                <TabBarMaxOut status= {'click'}sub = {sub} defaultStyle = {defaultStyle} currentIndex = {this.state.currentIndex} count={4} dataTitle = {dataTitle} cbfClick = {this.cbfBarClick}></TabBarMaxOut>
+                <div>你当前选择的是{this.getValue()}</div>
+                <TabBarMaxOut
+                    status= {'click'}
+                    sub = {sub}
+                    styleDefault = {defaultStyle}
+                    currentIndex = {this.state.currentIndex}
+                    count={4}
+                    dataTitle = {dataTitle}
+                    cbfClick = {this.cbfBarClick}>
+                </TabBarMaxOut>
+                <TabBarMaxOut
+                    status= {'click'}
+                    sub = {sub2}
+                    styleDefault = {defaultStyle}
+                    currentIndex = {this.state.currentIndex}
+                    count={4}
+                    dataTitle = {dataTitle}
+                    cbfClick = {this.cbfBarClick}>
+                </TabBarMaxOut>
 
                 {/*<AbsTabBar count={3} cbfClick = {this.cbfBarClick} defaultStyle = {defaultStyle} clickStyle = {clickStyle}>*/}
                     {/*<div style={userStyle}>123</div>*/}
@@ -127,41 +153,173 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
                 {/*<MyFollowBar currentIndex = {this.state.setIndex}/>*/}
             </div>
 
-            // <div style={{ height: "100%" }}>
-            //     <Carousel
-            //         index={this.state.Carouselindex}
-            //         contentPaddingTop={"20%"}
-            //         handleIndexChangeCallback={this.handleIndexChangeCallback} direction={"vertical"}
-            //         bottomNode={<StepProgressBar steps={steps} index={this.state.Carouselindex} width={250} />}>
-            //         <div data-index="11" style={{ height: "100%" }}>
-            //             <Avatar shape={"square"}>ZT</Avatar>
-            //         </div>
-            //         <div data-index="12" style={{ height: "100%" }}>
-            //             <Loading />
-            //         </div>
-            //         <div data-index="6" style={{ height: "100%" }}>
-            //             <Button />
-            //         </div>
-            //         <div data-index="5" style={{ height: "100%" }}>
-            //             <h1>ProgressBar</h1>
-            //             <div style={{width: "100%"}}><ProgressBar progress={40} buffer={20} isLoading={false} /></div>
-            //         </div>
-            //         <div data-index="2" style={{ height: "100%" }}>
-            //             <h1>Spinner</h1>
-            //             <Spinner size={1} />
-            //         </div>
-            //         <div data-index="3" style={{ height: "100%" }}>
-            //             <h1 onClick={this.clickhandle}>StepProgressBar</h1>
-            //             <StepProgressBar steps={steps} index={this.state.index} width={250} />
-            //         </div>
-            //         <div data-index="4" style={{ height: "100%" }}>
-            //             <h1>SnackBar</h1>
-            //             <button onClick={this.SnackBarClick}></button>
-            //             <SnackBar active={true}></SnackBar>
-            //         </div>
-            //     </Carousel>
-            // </div>
         );
+
+    }
+
+    getRouter() {
+
+        let resultRouter = {
+            '0':{
+                name: '报告中心',
+                type: 'tab-no',
+                color: 'red',
+                sub: {
+                    '0': {
+                        name: '预制报告',
+                        type: 'tab-icon',
+                        sub: {
+                            '0': {
+                                name: '浏览报告',
+                                type: 'bar-small',
+                            },
+                            '1': {
+                                name: '流量报告',
+                                type: 'bar-small',
+                            },
+                            '2': {
+                                name: '访客数据',
+                                type: 'bar-small',
+                            },
+                        }
+                    },
+                    '1': {
+                        name: '单一报告',
+                        type: 'bar-icon',
+                        sub: {
+                            '0': {
+                                name: '浏览报告'
+                            },
+                            '1': {
+                                name: '流量报告'
+                            },
+                            '2': {
+                                name: '访客数据'
+                            },
+                        }
+                    },
+                    '2': {
+                        name: '自定义报告组',
+                        type: 'tab-icon',
+                        sub: {
+                            '0': {
+                                name: '报告1'
+                            },
+                            '1': {
+                                name: '报告2'
+                            },
+                            '2': {
+                                name: '报告3'
+                            },
+                        }
+                    }
+
+                }
+            },
+            '1':{
+                name: '细分工具',
+                type: 'tab',
+                color: 'blue',
+                sub: {
+                    '0': {
+                        name: '事件细分1'
+                    },
+                    '1': {
+                        name: '事件细分2'
+                    },
+                    '2': {
+                        name: '事件细分3'
+                    },
+
+                }
+            },
+            '2':{
+                name: '运营工具',
+                color: 'green',
+                sub: {
+                    '0': {
+                        name: '运营工具1'
+                    },
+                    '1': {
+                        name: '运营工具2'
+                    },
+                    '2': {
+                        name: '运营工具3'
+                    },
+                }
+            },
+            '3':{
+                name: '报告工具',
+                color: 'purple',
+                sub: {
+                    '0': {
+                        name: '运营工具1'
+                    },
+                    '1': {
+                        name: '运营工具2'
+                    },
+                    '2': {
+                        name: '运营工具3'
+                    },
+                }
+            },
+
+        }
+        return resultRouter;
+    }
+
+    getValue() {
+        return
+        //1依次取出值
+        //2根据值依次往里面遍历
+        console.log('QQQQ!!!');
+        let result = this.state.arrayIndex;
+        let now = this.getRouter();
+        for (let i = 0; i < this.state.arrayIndex.length; i++) {
+            let index = result[i];
+            now = now[index];
+            if(now.sub) {
+                now = now.sub;
+            }
+        }
+        return 1;
+    }
+
+
+    //根据选中跳转路由
+    getRouteResult() {
+        let result1 = '';
+        let result2 = ''
+        switch(i) {
+            case 0:
+                result1 = '/报告中心';
+                switch (j){
+                    case 0:
+                        result1 = '/报告1';
+                        break;
+                    default:
+                }
+                break;
+            case 1:
+                result1 = '/细分工具';
+                switch (j){
+                    case 0:
+                        result1 = '/事件细分';
+                        break;
+                    case 1:
+                        result1 = '/漏斗分析';
+                        break;
+                    case 2:
+                        result1 = '/留存分析';
+                        break;
+                    case 3:
+                        result1 = '/事件细分';
+                        break;
+                    default:
+                }
+                break;
+                break;
+        }
     }
 }
 //
