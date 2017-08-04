@@ -35,9 +35,6 @@ export default class Tabbar extends React.Component<StateTypes> {
         // this.calcStatus = this.calcStatus.bind(this);
         // this.cbfPress = this.cbfPress.bind(this);
         this.state = {
-            ifPress: false,
-            ifClick: false,
-            ifCover: false,
             currentIndex: -1,
             currentFire: -1,
             status: 'default',

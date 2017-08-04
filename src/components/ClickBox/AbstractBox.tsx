@@ -6,6 +6,8 @@ import * as React from "react";
 
 
 interface StateTypes {
+    //问题
+    //需要一个变量,来控制它需要的事件相应
 
     index: number,//设置index的接口.(设置了就不会改变的,不应该放在state中)
     status: String,//表示按钮的状态.
