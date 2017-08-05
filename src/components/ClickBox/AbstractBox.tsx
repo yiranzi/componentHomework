@@ -15,8 +15,7 @@ interface StateTypes {
     // cbfHover: Function,
     // cbfPress: Function,
     //数据
-    title: String,//可选标题
-    image: String//背景图片
+    content: Object,//暂时保存有对于事件冒泡的处理方式.
     //样式
     styleBox: Object,//定义操作相应区域样式(大小)的接口
     styleClick: Object,
@@ -36,7 +35,6 @@ export default class Tabbar extends React.Component<StateTypes> {
         this.cbfHover = this.cbfHover.bind(this);
         this.cbfHoverOut = this.cbfHoverOut.bind(this);
         this.addStyleByStatus = this.addStyleByStatus.bind(this);
-        // this.cbfPress = this.cbfPress.bind(this);
         this.state = {
             status: 'default',
         };
@@ -46,18 +44,17 @@ export default class Tabbar extends React.Component<StateTypes> {
 
     render (){
 
-        return(<div style={this.addStyleByStatus()}>
-            <div style = {this.props.styleBox}
+        return(<div style={this.addStyleByStatus()}
                  onClick={this.cbfClick}
                 onMouseOver={this.cbfHover}
                 onMouseOut = {this.cbfHoverOut}>
-                {this.props.title}
                 {this.props.children}
-
-            </div>
         </div>)
 
-    },
+    }
+
+    //默认或者直接使用上层的内容.
+
 
     //这部分考虑到复用,就放在底层来写
     addStyleByStatus() {
@@ -94,6 +91,10 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     cbfHover() {
+        //开发事件相应.
+        if(!this.props.content.eventType.hover) {
+            return
+        }
         let index = this.props.index;
         if(this.state.status==='click'){
             return
@@ -111,7 +112,6 @@ export default class Tabbar extends React.Component<StateTypes> {
     }
 
     cbfClick() {
-        console.log('AAAAAAAAAAAAAa')
         let index = this.props.index;
         let arrayIndex = this.props.arrayIndex;
         // this.setState({

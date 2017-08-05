@@ -25,6 +25,7 @@ import Box1 from "@/ClickBox/BoxInner";
 import AbsTabBar from "@/components/Tabbar/AbsTabBar";
 import TabBar1 from "@/components/Tabbar/TabBar1";
 import TabBarMaxOut from "@/components/Tabbar/TabBarMaxOut";
+import TabBarTop from "@/components/Tabbar/TabBarTop";
 interface StateTypes {
     index: number;
     Carouselindex: number;
@@ -38,37 +39,12 @@ interface StateTypes {
 export class Greeting extends React.Component<{ name: String }, StateTypes> {
     constructor() {
         super();
-        this.clickhandle = this.clickhandle.bind(this);
-        this.SnackBarClick = this.SnackBarClick.bind(this);
-        this.handleIndexChangeCallback = this.handleIndexChangeCallback.bind(this);
         this.cbfBarClick = this.cbfBarClick.bind(this);
         this.state = {
             index: 1,
-            Carouselindex: 0,
-            onplay: true,
             currentIndex: 0,
             arrayIndex: 0,
         };
-    }
-    clickhandle() {
-        this.setState({
-            index: 2
-        });
-    }
-    SnackBarClick() {
-
-    }
-    handleIndexChangeCallback(index: number) {
-        if (this.state.Carouselindex + index > -1 && this.state.Carouselindex + index < 5) {
-            this.setState((prevState, props) => ({
-                Carouselindex: prevState.Carouselindex + index
-            }));
-        }
-    }
-    handleTap() {
-        this.setState((prevState, props) => ({
-           onPlay: prevState.onplay
-        }));
     }
 
     cbfBarClick(index,arrayIndex) {
@@ -90,6 +66,42 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
             backgroundColor: '#333C60',
             // border: '1px solid green',
         };
+        let content = [
+            {
+                content: {
+                    title: '1',
+                    //bg:
+                    color: 'red'
+                },
+                eventType: {
+                    click: true,
+                    hover: true,
+                }
+            },
+            {
+                content: {
+                    title: '2',
+                    //bg:
+                    color: 'green'
+                },
+                eventType: {
+                    click: true,
+                    hover: true,
+                }
+            },
+            {
+                content: {
+                    title: '3',
+                    //bg:
+                    color: 'blue'
+                },
+                eventType: {
+                    click: true,
+                    hover: true,
+                }
+            },
+        ]
+
         //定义整个数据
         let dataTitle = ['语文','数学','英语','编程'];
         let sub = [
@@ -110,29 +122,28 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
                 dataTitle: ['学前班编程','小学编程','中学编程','大学编程']
             }
         ];
-
-        //从服务器得到的渲染列表.
-
-
-        // let tabs = [
-        //     ['./assetsPlus/image/home/tabbar0_0.png','./assetsPlus/image/home/tabbar0_1.png'],
-        //     ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
-        //     ['./assetsPlus/image/home/tabbar1_0.png','./assetsPlus/image/home/tabbar1_1.png'],
-        // ];
         let sub2 = ['a','b','c','d'];
         return (<div>
                 {/*<Box1 index = {0} cbfClick = {this.cbfClick}>123</Box1>*/}
                 {/*<TabBar1 currentIndex = {this.state.currentIndex} count={4} dataTitle = {dataTitle} cbfClick = {this.cbfBarClick}></TabBar1>*/}
                 <div>你当前选择的是{this.getValue()}</div>
-                <TabBarMaxOut
+                <TabBarTop
+                    content = {content}
                     status= {'click'}
-                    sub = {sub}
                     styleDefault = {defaultStyle}
                     currentIndex = {this.state.currentIndex}
-                    count={4}
-                    dataTitle = {dataTitle}
                     cbfClick = {this.cbfBarClick}>
-                </TabBarMaxOut>
+                </TabBarTop>
+
+                {/*<TabBarMaxOut*/}
+                    {/*status= {'click'}*/}
+                    {/*sub = {sub}*/}
+                    {/*styleDefault = {defaultStyle}*/}
+                    {/*currentIndex = {this.state.currentIndex}*/}
+                    {/*count={4}*/}
+                    {/*dataTitle = {dataTitle}*/}
+                    {/*cbfClick = {this.cbfBarClick}>*/}
+                {/*</TabBarMaxOut>*/}
                 {/*<TabBarMaxOut*/}
                     {/*status= {'click'}*/}
                     {/*sub = {sub2}*/}
