@@ -62,8 +62,8 @@ export default class Tabbar extends React.Component<StateTypes> {
                                         status = {this.props.status}
                                         cbfClick = {this.cbfClick}
                                         index = {this.props.index}
-                                        title = {this.props.title}
                                         arrayIndex = {this.props.arrayIndex}>
+                {this.props.title}
             </AbstractBox>)
 
         // let index = this.props.index;

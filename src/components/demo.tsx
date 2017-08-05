@@ -127,23 +127,23 @@ export class Greeting extends React.Component<{ name: String }, StateTypes> {
                 {/*<Box1 index = {0} cbfClick = {this.cbfClick}>123</Box1>*/}
                 {/*<TabBar1 currentIndex = {this.state.currentIndex} count={4} dataTitle = {dataTitle} cbfClick = {this.cbfBarClick}></TabBar1>*/}
                 <div>你当前选择的是{this.getValue()}</div>
-                <TabBarTop
-                    content = {content}
-                    status= {'click'}
-                    styleDefault = {defaultStyle}
-                    currentIndex = {this.state.currentIndex}
-                    cbfClick = {this.cbfBarClick}>
-                </TabBarTop>
-
-                {/*<TabBarMaxOut*/}
+                {/*<TabBarTop*/}
+                    {/*content = {content}*/}
                     {/*status= {'click'}*/}
-                    {/*sub = {sub}*/}
                     {/*styleDefault = {defaultStyle}*/}
                     {/*currentIndex = {this.state.currentIndex}*/}
-                    {/*count={4}*/}
-                    {/*dataTitle = {dataTitle}*/}
                     {/*cbfClick = {this.cbfBarClick}>*/}
-                {/*</TabBarMaxOut>*/}
+                {/*</TabBarTop>*/}
+
+                <TabBarMaxOut
+                    status= {'click'}
+                    sub = {sub}
+                    styleDefault = {defaultStyle}
+                    currentIndex = {this.state.currentIndex}
+                    count={4}
+                    dataTitle = {dataTitle}
+                    cbfClick = {this.cbfBarClick}>
+                </TabBarMaxOut>
                 {/*<TabBarMaxOut*/}
                     {/*status= {'click'}*/}
                     {/*sub = {sub2}*/}

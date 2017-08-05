@@ -50,9 +50,9 @@ export default class Tabbar extends React.Component<StateTypes> {
                                         cbfClick = {this.props.cbfClick}
                                         cbfHover = {this.props.cbfHover}
                                         index = {this.props.index}
-                                        title = {this.props.title}
                                         arrayIndex = {this.props.arrayIndex}
             >
+                {this.props.title}
             </AbstractBox>)
     }
 
