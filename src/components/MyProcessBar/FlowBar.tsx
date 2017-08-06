@@ -2,20 +2,31 @@
  * Created by wuchuck on 7/26/17.
  */
 
+//原来想修改的abs
+
 import * as React from "react";
 
 
 interface StateTypes {
-    index: number,//设置index的接口
+    //问题
+    //需要一个变量,来控制它需要的事件相应
+    //结论 单一状体. 所有子组件的改变理论上可以通过父组件统一进行处理.
+    //类似于 覆盖之类的事件
+    //事件的上报 和 样式的改变 也许可以分离开
+
+    index: number,//设置index的接口.(设置了就不会改变的,不应该放在state中)
     status: String,//表示按钮的状态.
     cbfClick: Function,//点击事件回调接口
-    cbfHover: Function,//覆盖事件上报
-    cbfPress: Function,//按下事件上报
+    // cbfHover: Function,
+    // cbfPress: Function,
+    //数据
+    content: Object,//暂时保存有对于事件冒泡的处理方式.
+    //样式
     styleBox: Object,//定义操作相应区域样式(大小)的接口
-    styleClick: Object,//传入点击后的样式
+    styleClick: Object,
     styleHover: Object,
     stylePress: Object,
-    styleDefault: Object,//传入默认状态样式
+    styleDefault: Object,
 
 
 }
@@ -76,7 +87,6 @@ export default class Tabbar extends React.Component<StateTypes> {
         return this.addStyle(originStyle, addStyle);
     }
 
-    //添加额外样式
     addStyle(originStyle, addStyle) {
         let copy1 = JSON.parse(JSON.stringify(originStyle));
         for (let style in addStyle) {
@@ -84,38 +94,6 @@ export default class Tabbar extends React.Component<StateTypes> {
         }
         return copy1;
     }
-
-    cbfHover() {
-        //开发事件相应.
-        let index = this.props.index;
-        if(this.state.status==='click'){
-            return
-        }
-        this.setState({status: 'hover'});
-        // this.props.cbfHover(index)
-    }
-
-    cbfHoverOut() {
-        if(this.state.status==='click'){
-            return
-        }
-        this.setState({status: 'default'});
-        // this.props.cbfHoverOut(index)
-    }
-
-    cbfClick() {
-        let index = this.props.index;
-        let arrayIndex = this.props.arrayIndex;
-        // this.setState({
-        //     currentSelect: index,
-        //     status: 'click'});
-        this.props.cbfClick(index,arrayIndex);
-    },
-
-    // cbfPress(index) {
-    //     // this.setState({status: 'press'});
-    // },
-
 }
 
 

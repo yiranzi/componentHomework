@@ -2,17 +2,18 @@
  * Created by wuchuck on 7/26/17.
  */
 
+//tabbar的bar
+
 import * as React from "react";
-import * as className from "./style/AbstractBox.less";
-import AbstractBox from "./AbstractBox";
+import AbstractBox from "@/components/ClickBox/AbstractBox";
 
 
 interface StateTypes {
-    index: number,
+    index: number,//bar编号
     cbfClick: Function,//点击事件回调接口
-    content: Object,
-    status: String,
-    arrayIndex: Array,
+    content: Object,//内容包
+    status: String,//操作状态
+    arrayIndex: Array,//返还的数据包
 }
 
 
@@ -24,20 +25,20 @@ export default class Tabbar extends React.Component<StateTypes> {
 
     render (){
         let styleClick = {
-            width: '100%',
-            height: '50px',
-            borderBottom: '1px solid black',
             color: 'white',
-            backgroundColor: this.props.content.content.color,
+            height: '52px',
         }
         let styleHover = {
             color: 'white',
         }
         let styleDefault = {
-            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100px',
             height: '42px',
             // backgroundColor: 'blue',
-            borderBottom: '1px solid black',
+            border: '1px solid black',
             color: 'black',
             backgroundColor: this.props.content.content.color,
         };
@@ -62,12 +63,6 @@ export default class Tabbar extends React.Component<StateTypes> {
         //根据内容包
         let title = this.props.content.content.title;
         return (<span>{title}</span>)
-    }
-
-    cbfClick() {
-        console.log(arguments)
-        let type = 'awake';
-        this.props.cbfClibk(arguments,type)
     }
 }
 

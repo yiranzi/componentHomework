@@ -3,8 +3,9 @@
  */
 
 import * as React from "react";
-import BoxTop from "@/components/ClickBox/BoxTop";
+import BoxTop from "@/components/MyProcessBar/BoxTop";
 
+//tabbar组件.里面有很多小的bar
 //计算tabbar内的结果.上报click事件.等待更新currentIndex
 interface StateTypes {
     content: Object,//内容
@@ -31,6 +32,7 @@ export default class Tabbar extends React.Component<StateTypes> {
 
     }
 
+    //渲染内部组件
     renderBars() {
         let arr = [];
         for (let i = 0 ; i < this.props.content.length; i++) {
@@ -47,7 +49,7 @@ export default class Tabbar extends React.Component<StateTypes> {
         return arr;
     }
 
-    //没经过一个tabbar,记录子节点的编号到数组里.
+    //经过一个tabbar,记录子节点的编号到数组里.
     recordIndex(index) {
         let array = [];
         array.push(index);
